@@ -1,4 +1,4 @@
-from .models import MyUser
+from .models import *
 from rest_framework import serializers
 
 
@@ -23,3 +23,5 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+

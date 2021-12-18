@@ -7,8 +7,5 @@ from .models import *
 
 admin.site.unregister(Group)
 admin.site.register(MyUser)
-admin.site.register(Company)
-admin.site.register(Manufacturer)
-admin.site.register(Order)
-admin.site.register(ManufacturerOrder)
+
 
