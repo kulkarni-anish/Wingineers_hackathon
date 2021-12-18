@@ -1,0 +1,18 @@
+@import "./variable.scss";
+.navBar {
+  background-color: $secondary;
+  height: 100px;
+  margin-top: 0px !important;
+  &-header {
+    color: white;
+    font-family: "poppins" !important;
+    font-size: 300% !important;
+    display: flex;
+    height: inherit;
+    padding-left: 4%;
+    align-items: center !important;
+  }
+}
+body {
+  background-color: $primary;
+}

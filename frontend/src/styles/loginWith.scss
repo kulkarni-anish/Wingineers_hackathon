@@ -1,0 +1,64 @@
+@import "./variable.scss";
+.loginDiv {
+  margin-left: 7%;
+  max-width: 100%;
+  margin-top: 12%;
+  &-headings {
+    padding-bottom: 5%;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    font-size: 300% !important;
+    line-height: 150% !important;
+    display: flex !important;
+    font-family: "Poppins" !important;
+    color: #000000;
+  }
+  &-text {
+    font-family: "Poppins" !important;
+    font-size: 150% !important;
+    padding: 5%;
+  }
+}
+.styledInput {
+  display: flex;
+  background-color: $primary;
+  font-size: 150%;
+  height: 20%;
+  width: -webkit-fill-available;
+  border-width: 1px;
+  padding: 5%;
+  //   &:hover {
+  //     border-color: none !important;
+  //     border-width: 4px;
+  //   }
+}
+.styledButton {
+  background-color: $secondary !important;
+  margin-bottom: 5% !important;
+  float: right;
+}
+.styledRegister {
+  font-family: "Poppins" !important;
+  text-align: center;
+}
+.error {
+  color: red;
+  display: flex;
+  margin-bottom: 0 !important;
+}
+a {
+  color: black !important;
+  text-transform: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  .loginDiv {
+    margin: 13.5%;
+    margin-top: 10%;
+    padding: 15%;
+    width: 75%;
+  }
+  .navBar {
+    height: 75px !important;
+  }
+}
