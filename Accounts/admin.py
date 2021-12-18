@@ -8,3 +8,4 @@ from .models import *
 admin.site.unregister(Group)
 admin.site.register(MyUser)
 
+

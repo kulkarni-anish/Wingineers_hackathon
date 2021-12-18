@@ -11,6 +11,25 @@ from .serializers import *
 from Accounts.utils import send_mail, send_otp
 import random
 
+#REST FRAMEWORK
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+
+#sending mails
+from Accounts.utils import send_mail
+
+
+#serializers
+from Accounts.serializers import RegistrationSerializer
+from .serializers import *
+
+#models
+from .models import *
+
 # Create your views here.
 
 @api_view(['POST', ])
