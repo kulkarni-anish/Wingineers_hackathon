@@ -1,22 +1,21 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import "../styles/loginWith.scss";
-const LoginWith = () => {
+import Typography from "@mui/material/Typography";
+import "../styles/login.scss";
+const OtpWithEmail = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
+      otp: "",
     },
     validationSchema: Yup.object({
       email: Yup.string()
         .email("Please enter a valid email")
         .required("Required"),
-      password: Yup.string().required("Required"),
+      otp: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -26,7 +25,7 @@ const LoginWith = () => {
     <div className="loginDiv">
       <Grid container>
         <Grid item xs={12}>
-          <Typography className="loginDiv-headings ">LOGIN</Typography>
+          <Typography className="loginDiv-headings ">verify OTP</Typography>
         </Grid>
         <Grid item xs={12} sm={5}>
           <Typography className="loginDiv-text ">Email</Typography>
@@ -46,20 +45,20 @@ const LoginWith = () => {
           ) : null}
         </Grid>
         <Grid item xs={12} sm={5}>
-          <Typography className="loginDiv-text ">Password</Typography>
+          <Typography className="loginDiv-text ">otp</Typography>
         </Grid>
         <Grid item xs={12} sm={7}>
           <input
             className="styledInput"
-            id="password"
-            name="password"
-            type="password"
+            id="otp"
+            name="otp"
+            type="otp"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            value={formik.values.password}
+            value={formik.values.otp}
           />
-          {formik.touched.password && formik.errors.password ? (
-            <p className="error">{formik.errors.password}</p>
+          {formik.touched.otp && formik.errors.otp ? (
+            <p className="error">{formik.errors.otp}</p>
           ) : null}
         </Grid>
         <Grid item xs={12}>
@@ -69,21 +68,13 @@ const LoginWith = () => {
             className="styledButton"
             onClick={formik.handleSubmit}
           >
-            <Link to="/otp">Login</Link>
+            Submit
+            {/* <Link to="">Login</Link> */}
           </Button>
-        </Grid>
-
-        <Grid item xs={12}>
-          <div className="styledRegister">
-            <p>Or</p>
-            <Typography variant="contained">
-              <Link to="/Register">Register</Link>
-            </Typography>
-          </div>
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default LoginWith;
+export default OtpWithEmail;
