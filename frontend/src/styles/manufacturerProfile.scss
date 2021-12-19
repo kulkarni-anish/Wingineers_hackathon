@@ -1,0 +1,13 @@
+.manufacturerProfile{
+    &-profile{
+        font-size: 40px;
+        font-style:inherit;
+    }
+    &-image{
+        max-height:20 px;
+    }
+    &-text{
+        font-size: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
