@@ -3,7 +3,9 @@ import NavBar from "../components/navBar";
 import LoginWith from "../components/loginWith";
 import login_img from "../assets/login_img.jpeg";
 import Grid from "@mui/material/Grid";
-
+import Otp from "../components/otp";
+import OtpWithEmail from "../components/otpWithEmail";
+import OtpWithPhone from "../components/otpWithPhone";
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import Register from "../components/register";
 import "../styles/login.scss";
@@ -17,6 +19,9 @@ const Login = () => {
             <Routes>
               <Route path="/Register" element={<Register />}></Route>
               <Route path="/" element={<LoginWith />}></Route>
+              <Route path="/otp/withEmail" element={<OtpWithEmail />}></Route>
+              <Route path="/otp/withPhone" element={<OtpWithPhone />}></Route>
+              <Route path="/otp/" element={<Otp />}></Route>
             </Routes>
           </Router>
         </Grid>
