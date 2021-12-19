@@ -50,7 +50,7 @@ function App() {
           </Route>
 
           <Route exact path='/' element={<PrivateWrapper/>}>
-            <Route exact path='/' element={<  ManufacturerWrapper/>}>
+            <Route exact path='/' element={< ManufacturerWrapper/>}>
               <Route path="/manufacturer" element={<ManufacturerPage />} />
             </Route>
           </Route>
