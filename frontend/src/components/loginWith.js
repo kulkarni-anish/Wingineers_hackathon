@@ -19,7 +19,14 @@ const LoginWith = () => {
       password: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      const formData=new FormData()
+      formData.append('username',values.email)
+      formData.append('password',values.password)
+      fetch("http://127.0.0.1:8000/accounts/login/",{
+            method:'POST',
+            body:formData,
+        }).then(res=>res.json().then(json=>console.log(json)))
+        .catch(err=>console.log("fucked",err))
     },
   });
   return (
