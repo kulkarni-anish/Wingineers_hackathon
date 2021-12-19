@@ -5,7 +5,7 @@ import Profile from "./pages/manufacturerProfile";
 function App() {
   return (
     <div>
-      <Login />
+      <Profile />
     </div>
   );
 }

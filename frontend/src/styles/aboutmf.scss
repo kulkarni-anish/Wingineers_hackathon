@@ -1,0 +1,29 @@
+.table{
+    &-text1{
+        font-size: 18px !important;
+        background-color: #FFF4EE;
+        font-family: "Poppins" !important;
+    }
+    &-text2{
+        background-color: #FFF4EE;
+        font-family: "Poppins" !important;
+        color:#7A431D !important;
+    }
+    &-head{
+        font-size: 20px !important;
+        background-color: #FFF4EE;
+        font-family: "Poppins" !important;
+    }
+    &-about{
+        padding-left: 60px !important;
+        font-family: "Poppins" !important;
+        background-color: #FFF4EE;
+        font-size: 20px !important;
+    }
+    &-product{
+        background-color: #FFF4EE;
+    }
+    &-timeline{
+        background-color: #FFF4EE;
+    }
+}
