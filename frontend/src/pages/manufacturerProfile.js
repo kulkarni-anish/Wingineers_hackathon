@@ -3,7 +3,7 @@ import About from "../components/aboutManufacturer";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import BasicTable from "../components/aboutManufacturer";
-import AboutManu from "../components/AboutManu";
+import Timeline from "../components/Timeline";
 import ProductForm from "../components/ProductForm";
 import NavBar from "../components/navBar";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
@@ -66,8 +66,8 @@ function Profile() {
           </Grid>
 
           <Routes>
-            <Route path="timeline" element={<BasicTable />} />
-            <Route path="about" element={<AboutManu />} />
+            <Route path="timeline" element={<Timeline />} />
+            <Route path="about" element={<BasicTable />} />
             <Route path="product" element={<ProductForm />} />
           </Routes>
         </Grid>
