@@ -37,12 +37,14 @@ function Profile() {
           </Typography>
           <Typography className="manufacturerProfile-text3">Address</Typography>
           <Typography className="manufacturerProfile-text4">
-            Rating
-            <StarRateIcon />
-            <StarRateIcon />
-            <StarRateIcon />
-            <StarRateIcon />
-            <StarRateIcon />
+            Rating :
+            <div className="star">
+              <StarRateIcon />
+              <StarRateIcon />
+              <StarRateIcon />
+              <StarRateIcon />
+              <StarRateIcon />
+            </div>
           </Typography>
           <Grid container className="nav">
             <Grid item xs={4}>
