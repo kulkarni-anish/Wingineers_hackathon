@@ -69,7 +69,7 @@ class Order(models.Model):
 class ManufacturerOrder(models.Model):
     manufacturer=models.ForeignKey(Manufacturer,on_delete=models.CASCADE)
     dispersion_date=models.DateField()
-    last_date_dispersion=models.DateField()# it is the regular duration at which the order will be sent
+    last_date_dispersion=models.DateField(default=None)# it is the regular duration at which the order will be sent
     discount=models.IntegerField()
     upperLimit=models.IntegerField(default=500)
     lowerLimit=models.IntegerField(default=1000)

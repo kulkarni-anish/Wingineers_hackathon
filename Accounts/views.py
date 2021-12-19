@@ -60,7 +60,6 @@ def registration_view(request):
             data = serializer.errors
         return Response(data)
 
-<<<<<<< HEAD
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
@@ -72,11 +71,11 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'user_id': user.pk,
-            'email': user.email
+            'email': user.email,
+            'type':user.type
         })
 
 
-=======
 @api_view(['POST', ])
 #def email_verification_view(request,tk):
 def email_verification_view(request):
@@ -158,4 +157,3 @@ class Otp_Verification(APIView):
     #             return Response({'status': 404, 'message': 'try after some time'})
     #     except Exception as e:
     #         print(e)
->>>>>>> 38d4ebec90a8e8af02000c58ca19162597690ee1
