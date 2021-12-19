@@ -8,10 +8,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useState } from "react";
+import { orange } from "@material-ui/core/colors";
+import "../styles/aboutmf.scss"
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 300
+    minWidth: 300,
   }
 });
 
@@ -35,21 +37,15 @@ export default function BasicTable() {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="table">
       <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell align="center"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+        <TableBody className="table-body">
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="center" component="th" scope="row">
+              <TableCell align="center" component="th" scope="row" className="table-text">
                 {row.name}
               </TableCell>
-              <TableCell align="center">{row.value}</TableCell>
+              <TableCell align="center" className="table-text">{row.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
