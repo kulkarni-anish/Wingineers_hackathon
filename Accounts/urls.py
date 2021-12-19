@@ -10,6 +10,6 @@ from . import views
 urlpatterns = [
     path('login/',views.CustomAuthToken().as_view()),
     path('register/', registration_view, name="register"),
-    path('verify-otp', Otp_Verification.as_view()),
-    path('verify-email',email_verification_view),
+    path('verify-otp/', Otp_Verification.as_view()),
+    path('verify-email/',email_verification_view),
 ]

@@ -39,7 +39,7 @@ class ManufacturerView(generics.ListCreateAPIView):
         serializer=ManufacturerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data.id)
+            return Response(serializer.data)
         else:
             return Response(serializer.errors)
 

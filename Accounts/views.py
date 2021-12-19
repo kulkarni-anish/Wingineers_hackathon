@@ -46,9 +46,10 @@ def registration_view(request):
             token = Token.objects.get(user=user).key
             data['token'] = token
             data['phone_number'] = user.phone_number
+            data['type']= user.type
 
 
-            send_mail(tk=token,user=user,html='',
+            send_mail(user=user,html='',
                 text='Here is your OTP',
                 subject='User Verification',
                 from_email='djangorest3@gmail.com',
@@ -67,6 +68,11 @@ class CustomAuthToken(ObtainAuthToken):
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+        send_mail(user=user,html='',
+                text='Here is your OTP',
+                subject='User Verification',
+                from_email='djangorest3@gmail.com',
+                to_emails=[user.email])
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
@@ -77,15 +83,8 @@ class CustomAuthToken(ObtainAuthToken):
 
 
 @api_view(['POST', ])
-#def email_verification_view(request,tk):
 def email_verification_view(request):
     if request.method == 'POST':
-        # token = tk
-        # print(tk)
-        # user = Token.objects.get(key=token).user
-        # print(user.is_active)
-        # user.is_active = True
-        # user.save()
         data = request.data
         user = MyUser.objects.get(email_otp = data['email_otp'])
         otp = data['email_otp']

@@ -31,18 +31,12 @@ Year established
 """
 
 class Manufacturer(models.Model):
-    STATUS=(
-    ("Retailer","Retailer"),
-    ("Wholesaler","Wholesaler"),
-    )
     email=models.EmailField(max_length=255,default="patwat@gmail.com")
     company_name=models.CharField(max_length=200)
-    buisness_type=models.CharField(max_length=200,choices=STATUS)
     main_products=models.CharField(max_length=100)
     total_annual_revenue=models.CharField(max_length=100)
-    certification=models.ImageField()
-    total_employee=models.IntegerField()
-    year_esatblished=models.IntegerField()
+    total_employee=models.CharField(max_length=255)
+    year_esatblished=models.CharField(max_length=255)
     registered_date=models.DateTimeField(auto_now_add=True)
     address_main=models.CharField(max_length=255)
     zip_code=models.IntegerField()

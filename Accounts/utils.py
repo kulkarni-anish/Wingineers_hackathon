@@ -4,11 +4,15 @@ from email.mime.multipart import MIMEMultipart
 from decouple import config
 import random
 from django.core.cache import cache
+import http.client
 
-username=config('username')
-password=config('password')
 
-def send_mail(tk,user,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
+#username=config('username')
+#password=config('password')
+username='djangorest3@gmail.com'
+password='DjangoRest#123'
+
+def send_mail(user,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
 
 
     otp_gen = random.randint(1000,9999)
@@ -23,7 +27,7 @@ def send_mail(tk,user,html=None,text='Email_body',subject='Confirmation',from_em
     txt_part=MIMEText(text,'plain')
     msg.attach(txt_part)
 
-    html_part = MIMEText(f"<p>Here is your account verification http://127.0.0.1:8000/verify/{tk}</p><h1>{html}</h1>", 'html')
+    html_part = MIMEText(f"<p>Here is you email verification OTP - {otp_gen}</p><h1>{html}</h1>", 'html')
     msg.attach(html_part)
     msg_str=msg.as_string()
 
