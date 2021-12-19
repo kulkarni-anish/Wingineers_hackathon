@@ -44,21 +44,21 @@ export default function BasicTable() {
       <Table className={classes.table} aria-label="simple table">
       <TableHead >
           <TableRow >
-            <TableCell align="center" className="table-head" className="table-timeline"><ClearAllIcon/>Timeline</TableCell>
-            <TableCell align="center" className="table-head" className="table-about"><ContactMailIcon/>About</TableCell>
-            <TableCell align="center" className="table-head" className="table-product"><LocalOfferIcon/>Product</TableCell>
+            <TableCell align="center"  className="table-timeline"><ClearAllIcon/>Timeline</TableCell>
+            <TableCell align="center"  className="table-about"><ContactMailIcon/>About</TableCell>
+            <TableCell align="center"  className="table-product"><LocalOfferIcon/>Product</TableCell>
           </TableRow>
         </TableHead>
         <TableBody className="table-body">
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="center" component="th" scope="row" className="table-text" className="table-text1">
+              <TableCell align="center" component="th" scope="row"  className="table-text1">
                 {row.name}
               </TableCell>
-              <TableCell align="center" component="th" scope="row" className="table-text" className="table-text1">
+              <TableCell align="center" component="th" scope="row"  className="table-text1">
                 {row.calories}
               </TableCell>
-              <TableCell align="center" className="table-text" className="table-text2">{row.value}</TableCell>
+              <TableCell align="center"  className="table-text2">{row.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>

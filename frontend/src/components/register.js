@@ -2,11 +2,17 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useFormik } from "formik";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import * as Yup from "yup";
+import Company from "./companyform";
+import Manufacturer from "./manufactureform";
 import "../styles/loginWith.scss";
 // import "../styles/register.scss";
 const Register = () => {
+  const [type,setType]=useState()
+  const [user,setUser]=useState()
+  const [email,setEmail]=useState()
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -35,11 +41,26 @@ const Register = () => {
         .max(10, "Exceeded maximum charecter length of 10"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      const formData=new FormData()
+      formData.append('email',values.email)
+      formData.append('password',values.setPassword)
+      formData.append('password2',values.confirmPassword)
+      formData.append('phone_number',values.name)
+      formData.append('type',values.type)
+      fetch("http://127.0.0.1:8000/accounts/register/",{
+            method:'POST',
+            body:formData,
+        }).then(res=>res.json().then(json=>setUser(json)))
+        .catch(err=>console.log(err))
     },
   });
   return (
-    <div className="loginDiv">
+    <div>
+      {user?
+    <div>{user.type=="company"?
+    <Company email={user.email} />
+    :<Manufacturer email={user.email} />}</div>
+    :<div className="loginDiv">
       <Grid container>
         <Grid item xs={12}>
           <Typography className="loginDiv-headings">Register</Typography>
@@ -120,7 +141,7 @@ const Register = () => {
             className="styledInput "
             id="type"
             name="type"
-            type="type"
+            type="name"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.type}
@@ -140,6 +161,7 @@ const Register = () => {
           </Button>
         </Grid>
       </Grid>
+    </div>}
     </div>
   );
 };
