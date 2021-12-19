@@ -1,11 +1,13 @@
-import React from "react";
+import React,{ useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Navigate } from 'react-router-dom'
 
 const Manufacturer = ({email}) => {
+    const [user,setUser]=useState()
     const items=['ManufacturerName','TotalAnnualRevenue','MainProducts','Employees','YearEstablished','Address','City','State','Pincode','Country']
     const formik = useFormik({
       initialValues: {
@@ -40,7 +42,7 @@ const Manufacturer = ({email}) => {
           fetch("http://127.0.0.1:8000/clients/manufacturer/",{
             method:'POST',
             body:formData,
-        }).then(res=>res.json().then(json=>console.log(json)))
+        }).then(res=>res.json().then(json=>setUser(json)))
         .catch(err=>console.log(err))
       },
     });
@@ -81,6 +83,9 @@ const Manufacturer = ({email}) => {
             >
               Register
             </Button>
+            {user?
+            <Navigate to="/login" />:
+            <Navigate to="/Register"/>}
           </Grid>
         </Grid>
       </div>

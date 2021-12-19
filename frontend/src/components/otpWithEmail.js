@@ -18,7 +18,14 @@ const OtpWithEmail = () => {
       otp: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      const formData=new FormData()
+      formData.append('email',values.email)
+      formData.append('email_otp',values.otp)
+      fetch("http://127.0.0.1:8000/accounts/verify-email/",{
+            method:'POST',
+            body:formData,
+        }).then(res=>res.json().then(json=>console.log(json)))
+        .catch(err=>console.log(err))
     },
   });
   return (

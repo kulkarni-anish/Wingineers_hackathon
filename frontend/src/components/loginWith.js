@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -6,7 +6,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "../styles/loginWith.scss";
+import { Redirect } from "react-router-dom"
+import { Navigate } from 'react-router-dom'
+
 const LoginWith = () => {
+  const [userDetails,setUserDetails]=useState()
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -25,8 +29,8 @@ const LoginWith = () => {
       fetch("http://127.0.0.1:8000/accounts/login/",{
             method:'POST',
             body:formData,
-        }).then(res=>res.json().then(json=>console.log(json)))
-        .catch(err=>console.log("fucked",err))
+        }).then(res=>res.json().then(json=>setUserDetails(json)))
+        .catch(err=>console.log(err))
     },
   });
   return (
@@ -75,9 +79,10 @@ const LoginWith = () => {
             variant="contained"
             className="styledButton"
             onClick={formik.handleSubmit}
-          >
-            <Link to="/otp">Login</Link>
+          >Login
           </Button>
+          {userDetails?userDetails.token?
+          <Navigate to="/otp" />:<p>Wrong credentials</p>:<div></div>}
         </Grid>
 
         <Grid item xs={12}>

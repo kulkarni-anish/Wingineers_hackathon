@@ -18,7 +18,7 @@ const Login = () => {
           <Router>
             <Routes>
               <Route path="/Register" element={<Register />}></Route>
-              <Route path="/" element={<LoginWith />}></Route>
+              <Route path="/login" element={<LoginWith />}></Route>
               <Route path="/otp/withEmail" element={<OtpWithEmail />}></Route>
               <Route path="/otp/withPhone" element={<OtpWithPhone />}></Route>
               <Route path="/otp/" element={<Otp />}></Route>
