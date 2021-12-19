@@ -17,7 +17,7 @@ const Otp = () => {
 
         <Grid item xs={2}>
           <Button className="arrowButton">
-            <Link to="/otp/withEmail">
+            <Link to="withEmail">
               <KeyboardArrowDownIcon />
             </Link>
           </Button>
@@ -27,7 +27,7 @@ const Otp = () => {
         </Grid>
         <Grid item xs={2}>
           <Button className="arrowButton">
-            <Link to="/otp/withPhone">
+            <Link to="withPhone">
               <KeyboardArrowDownIcon />
             </Link>
           </Button>
