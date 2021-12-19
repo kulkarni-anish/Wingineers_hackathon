@@ -47,7 +47,7 @@ def registration_view(request):
             data['phone_number'] = user.phone_number
 
 
-            send_mail(tk=token,user=user,html='',
+            send_mail(user=user,html='',
                 text='Here is your OTP',
                 subject='User Verification',
                 from_email='djangorest3@gmail.com',
@@ -60,15 +60,8 @@ def registration_view(request):
         return Response(data)
 
 @api_view(['POST', ])
-#def email_verification_view(request,tk):
 def email_verification_view(request):
     if request.method == 'POST':
-        # token = tk
-        # print(tk)
-        # user = Token.objects.get(key=token).user
-        # print(user.is_active)
-        # user.is_active = True
-        # user.save()
         data = request.data
         user = MyUser.objects.get(email_otp = data['email_otp'])
         otp = data['email_otp']

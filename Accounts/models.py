@@ -15,8 +15,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     email           = models.EmailField(max_length=60,unique=True)
     phone_number    = models.CharField(max_length = 15, null=True)
+    type            = models.CharField(max_length=20, default='Manufacturer')
     is_admin        = models.BooleanField(default = False)
-    is_active       = models.BooleanField(default = False)
+    is_active       = models.BooleanField(default = True)
     is_staff        = models.BooleanField(default = False)
     is_superuser    = models.BooleanField(default = False)
     email_is_verified   = models.BooleanField(default=False)
@@ -43,8 +44,4 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL) 
-# def verify_user(sender, instance=None, created=False, **kwargs):
-#     if user
 
