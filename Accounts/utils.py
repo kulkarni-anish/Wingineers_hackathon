@@ -2,11 +2,19 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from decouple import config
+import random
+from django.core.cache import cache
 
 username=config('username')
 password=config('password')
 
-def send_mail(tk,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
+def send_mail(tk,user,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
+
+
+    otp_gen = random.randint(1000,9999)
+    user.email_otp  = otp_gen
+    user.save()
+
     assert isinstance(to_emails,list)
     msg=MIMEMultipart('alternative')
     msg['From']=from_email
@@ -25,3 +33,17 @@ def send_mail(tk,html=None,text='Email_body',subject='Confirmation',from_email='
     server.login(username,password)
     server.sendmail(from_email,to_emails,msg_str)
     server.quit()
+
+
+def send_otp(phone_number, user_obj):
+
+    # if cache.get(phone_number):        #To check if the otp is stil valid
+    #     return False
+
+    otp_gen = random.randint(1000,9999)
+    # cache.set(phone_number, otp_gen, timeout=180)
+    user_obj.phone_otp  = otp_gen
+    user_obj.save()
+    return True
+
+
