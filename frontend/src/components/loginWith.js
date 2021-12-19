@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import PropTypes from 'prop-types';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "../styles/loginWith.scss";
 import { Redirect } from "react-router-dom"
 import { Navigate } from 'react-router-dom'
+import { TokenContext } from "../context/useToken";
+import useToken from "../context/useToken";
 
 const LoginWith = () => {
-  const [userDetails,setUserDetails]=useState()
+  
+    const saveToken = (userToken,userType) => {
+      sessionStorage.setItem('token', JSON.stringify(userToken));
+      sessionStorage.setItem('type', JSON.stringify(userType));
+    };
+  
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -30,7 +38,7 @@ const LoginWith = () => {
         method: "POST",
         body: formData,
       })
-        .then((res) => res.json().then((json) => console.log(json)))
+        .then(res => res.json().then(json => saveToken(json.token,json.type)))
         .catch((err) => console.log("fucked", err));
     },
   });
@@ -81,10 +89,8 @@ const LoginWith = () => {
             className="styledButton"
             onClick={formik.handleSubmit}
           >
-            <Link to="otp/">Login</Link>
+          <Link to="otp/">Login</Link>
           </Button>
-          {userDetails?userDetails.token?
-          <Navigate to="/otp" />:<p>Wrong credentials</p>:<div></div>}
         </Grid>
 
         <Grid item xs={12}>
@@ -101,3 +107,5 @@ const LoginWith = () => {
 };
 
 export default LoginWith;
+
+
