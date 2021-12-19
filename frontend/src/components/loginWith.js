@@ -77,7 +77,7 @@ const LoginWith = () => {
             className="styledButton"
             onClick={formik.handleSubmit}
           >
-            <Link to="otp/*">Login</Link>
+            <Link to="otp/">Login</Link>
           </Button>
         </Grid>
 

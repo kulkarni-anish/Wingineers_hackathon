@@ -40,13 +40,6 @@ export default function BasicTable() {
   return (
     <TableContainer component={Paper} className="table">
       <Table className={classes.table} aria-label="simple table">
-        {/* <TableHead >
-          <TableRow >
-            <TableCell align="center"  className="table-timeline"><ClearAllIcon/>Timeline</TableCell>
-            <TableCell align="center"  className="table-about"><ContactMailIcon/>About</TableCell>
-            <TableCell align="center"  className="table-product"><LocalOfferIcon/>Product</TableCell>
-          </TableRow>
-        </TableHead> */}
         <TableBody className="table-body">
           {rows.map((row) => (
             <TableRow key={row.name}>

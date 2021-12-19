@@ -3,6 +3,8 @@ import About from "../components/aboutManufacturer";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import BasicTable from "../components/aboutManufacturer";
+import AboutManu from "../components/AboutManu";
+import ProductForm from "../components/ProductForm";
 import NavBar from "../components/navBar";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import "../styles/manufacturerProfile.scss";
@@ -52,19 +54,21 @@ function Profile() {
             <Grid item xs={4}>
               <Typography className="manufacturerProfile-link">
                 <ContactMailIcon className="manufacturerProfile-link-icon" />
-                <Link to="/about"> about</Link>
+                <Link to="about"> about</Link>
               </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography className="manufacturerProfile-link">
                 <LocalOfferIcon className="manufacturerProfile-link-icon" />
-                product
+                <Link to="product"> product</Link>
               </Typography>
             </Grid>
           </Grid>
 
           <Routes>
             <Route path="timeline" element={<BasicTable />} />
+            <Route path="about" element={<AboutManu />} />
+            <Route path="product" element={<ProductForm />} />
           </Routes>
         </Grid>
       </Grid>
