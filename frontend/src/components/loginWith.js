@@ -23,14 +23,15 @@ const LoginWith = () => {
       password: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      const formData=new FormData()
-      formData.append('username',values.email)
-      formData.append('password',values.password)
-      fetch("http://127.0.0.1:8000/accounts/login/",{
-            method:'POST',
-            body:formData,
-        }).then(res=>res.json().then(json=>setUserDetails(json)))
-        .catch(err=>console.log(err))
+      const formData = new FormData();
+      formData.append("username", values.email);
+      formData.append("password", values.password);
+      fetch("http://127.0.0.1:8000/accounts/login/", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json().then((json) => console.log(json)))
+        .catch((err) => console.log("fucked", err));
     },
   });
   return (
@@ -79,7 +80,8 @@ const LoginWith = () => {
             variant="contained"
             className="styledButton"
             onClick={formik.handleSubmit}
-          >Login
+          >
+            <Link to="otp/">Login</Link>
           </Button>
           {userDetails?userDetails.token?
           <Navigate to="/otp" />:<p>Wrong credentials</p>:<div></div>}
@@ -89,7 +91,7 @@ const LoginWith = () => {
           <div className="styledRegister">
             <p>Or</p>
             <Typography variant="contained">
-              <Link to="/Register">Register</Link>
+              <Link to="Register">Register</Link>
             </Typography>
           </div>
         </Grid>

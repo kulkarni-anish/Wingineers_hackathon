@@ -15,15 +15,13 @@ const Login = () => {
       <NavBar />
       <Grid container>
         <Grid item sm={12} md={6} lg={6}>
-          <Router>
-            <Routes>
-              <Route path="/Register" element={<Register />}></Route>
-              <Route path="/login" element={<LoginWith />}></Route>
-              <Route path="/otp/withEmail" element={<OtpWithEmail />}></Route>
-              <Route path="/otp/withPhone" element={<OtpWithPhone />}></Route>
-              <Route path="/otp/" element={<Otp />}></Route>
-            </Routes>
-          </Router>
+          <Routes>
+            <Route path="/Register" element={<Register />}></Route>
+            <Route path="/" element={<LoginWith />}></Route>
+            <Route path="/otp/withEmail" element={<OtpWithEmail />}></Route>
+            <Route path="/otp/withPhone" element={<OtpWithPhone />}></Route>
+            <Route path="/otp/" element={<Otp />}></Route>
+          </Routes>
         </Grid>
         <Grid item sm={12} md={6} lg={6}>
           <div className="img_div">

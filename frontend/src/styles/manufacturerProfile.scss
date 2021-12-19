@@ -1,50 +1,61 @@
-.manufacturerProfile{
-    &-profile{
-        font-size: 40px;
-        font-style:inherit;
-        font-family: "Poppins" !important;
-        padding-left: 50px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+.manufacturerProfile {
+  &-profile {
+    font-size: 40px;
+    font-style: inherit;
+    font-family: "Poppins" !important;
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  &-image {
+    // max-height: 20px;
+    padding-left: 50px;
+    padding-bottom: 20px;
+  }
+  &-text {
+    font-family: "Poppins" !important;
+    font-size: 10px;
+    padding-left: 50px;
+  }
+  &-text1 {
+    font-family: "Poppins" !important;
+    padding-left: 50px;
+    font-size: 30px !important;
+  }
+  &-text2 {
+    font-family: "Poppins" !important;
+    padding-left: 50px;
+  }
+  &-text3 {
+    font-family: "Poppins" !important;
+    padding-left: 50px;
+    font-size: 20px !important;
+  }
+  &-text4 {
+    font-family: "Poppins" !important;
+    padding-left: 50px;
+    padding-bottom: 50px;
+  }
+  &-square {
+    height: 50px;
+    width: 50px;
+    background-color: #555;
+  }
+  &-icon {
+    padding-right: 20px;
+    padding-left: 10px;
+    transform: scale(2);
+  }
+  &-link {
+    display: flex;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 5%;
+    font-size: 150% !important;
+    font-family: "Poppins" !important;
+    &-icon {
+      margin-right: 2% !important;
+      margin-top: 2%;
     }
-    &-image{
-        max-height:20 px;
-        padding-left: 50px;
-        padding-bottom: 20px;
-    }
-    &-text{
-        font-family: "Poppins" !important;
-        font-size: 10px;
-        padding-left: 50px;
-    }
-    &-text1{
-        font-family: "Poppins" !important;
-        padding-left: 50px;
-        font-size: 30px !important;
-    }
-    &-text2{
-        font-family: "Poppins" !important;
-        padding-left: 50px;
-    }
-    &-text3{
-        font-family: "Poppins" !important;
-        padding-left: 50px;
-        font-size: 20px !important;
-    }
-    &-text4{
-        font-family: "Poppins" !important;
-        padding-left: 50px;
-        padding-bottom: 50px;
-    }
-    &-square {
-        height: 50px;
-        width: 50px;
-        background-color: #555;
-      } 
-      &-icon{
-        padding-right: 20px;
-        padding-left: 10px;
-        transform: scale(2);
-      }
-      
+  }
 }
