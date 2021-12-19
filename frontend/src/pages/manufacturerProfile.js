@@ -3,6 +3,8 @@ import About from "../components/aboutManufacturer";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import BasicTable from "../components/aboutManufacturer";
+import Timeline from "../components/Timeline";
+import ProductForm from "../components/ProductForm";
 import NavBar from "../components/navBar";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import "../styles/manufacturerProfile.scss";
@@ -35,12 +37,14 @@ function Profile() {
           </Typography>
           <Typography className="manufacturerProfile-text3">Address</Typography>
           <Typography className="manufacturerProfile-text4">
-            Rating
-            <StarRateIcon />
-            <StarRateIcon />
-            <StarRateIcon />
-            <StarRateIcon />
-            <StarRateIcon />
+            Rating :
+            <div className="star">
+              <StarRateIcon />
+              <StarRateIcon />
+              <StarRateIcon />
+              <StarRateIcon />
+              <StarRateIcon />
+            </div>
           </Typography>
           <Grid container className="nav">
             <Grid item xs={4}>
@@ -52,19 +56,21 @@ function Profile() {
             <Grid item xs={4}>
               <Typography className="manufacturerProfile-link">
                 <ContactMailIcon className="manufacturerProfile-link-icon" />
-                <Link to="/about"> about</Link>
+                <Link to="about"> about</Link>
               </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography className="manufacturerProfile-link">
                 <LocalOfferIcon className="manufacturerProfile-link-icon" />
-                product
+                <Link to="product"> product</Link>
               </Typography>
             </Grid>
           </Grid>
 
           <Routes>
-            <Route path="timeline" element={<BasicTable />} />
+            <Route path="timeline" element={<Timeline />} />
+            <Route path="about" element={<BasicTable />} />
+            <Route path="product" element={<ProductForm />} />
           </Routes>
         </Grid>
       </Grid>
