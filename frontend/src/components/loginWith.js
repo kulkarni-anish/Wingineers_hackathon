@@ -67,7 +67,7 @@ const LoginWith = () => {
             type="submit"
             variant="contained"
             className="styledButton"
-            // onClick={formik.handleSubmit}
+            onClick={formik.handleSubmit}
           >
             Login
           </Button>
