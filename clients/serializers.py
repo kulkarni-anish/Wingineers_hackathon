@@ -26,7 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        exclude = ['duration','sell_price','upper_limit','lower_limit']
+        exclude = ['duration','sell_price','upper_limit','lower_limit','stock_left']
 
 class CartSerializer(serializers.ModelSerializer):
     company = CompanySerializer()

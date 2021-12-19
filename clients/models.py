@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.fields import DurationField
 from django.db.models.fields.files import ImageField
+from django.db.models.signals import post_save
+from django.dispatch.dispatcher import receiver
 from Accounts.models import MyUser
 from django.conf import settings
 
@@ -65,8 +67,8 @@ class Product(models.Model):
     duration            = DurationField(blank=True,null=True)# it is the regular duration at which the order will be sent
     cost_price          = models.IntegerField(null=True)
     sell_price          = models.IntegerField(blank=True,null=True)  #Give choices here
-
     stock               = models.IntegerField(null=True)
+    stock_left          = models.IntegerField(null=True,default=1000)
     upper_limit         = models.IntegerField(default=50)
     lower_limit         = models.IntegerField(default=1000)
 
@@ -97,3 +99,12 @@ class ProductOrder(models.Model):
     def get_product_total(self):
         total = self.product.sell_price * self.quantity
         return total
+
+
+@receiver(post_save, sender=ProductOrder)       #post_save is the signal
+def stock_reset(sender, instance=None, created=False, **kwargs):
+    if created:
+        prod_id = instance.product.id
+        prod = Product.objects.get(id=prod_id)
+        prod.stock = prod.initial_stock
+        prod.save()

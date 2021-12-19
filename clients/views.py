@@ -1,5 +1,6 @@
 from copy import error
 from django.shortcuts import render
+import datetime
 
 #REST FRAMEWORK
 from rest_framework.response import Response
@@ -73,7 +74,33 @@ class Productview(generics.ListCreateAPIView):
         serializer=ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            #user= MyUser.objects.get(email=serializers.manufacturer_email)
+            print(serializer.data)
+            prod_id = serializer.data['id']
+            prod=Product.objects.get(id=prod_id)
+
+            prod.stock_left = prod.stock
+            prod.sell_price = prod.cost_price*110/100
+
+            prod.duration   = datetime.timedelta(days=30)
+
+            r1= range(1,100)
+            r2= range(100,500)
+            r3= range(500,10000)
+            if prod.stock in r1:
+                prod.lower_limit = 1
+                prod.upper_limit = 10
+            elif prod.stock in r2:
+                prod.lower_limit = 10
+                prod.upper_limit = 50
+            elif prod.stock in r3:
+                prod.lower_limit = 50
+                prod.upper_limit = 100
+            else:
+                prod.lower_limit = 0
+                prod.upper_limit = 0
+
+            prod.save()
+
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
