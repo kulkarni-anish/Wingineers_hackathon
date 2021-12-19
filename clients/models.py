@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.fields import DurationField
+from django.db.models.fields.files import ImageField
 from Accounts.models import MyUser
 from django.conf import settings
 
@@ -46,27 +48,47 @@ class Manufacturer(models.Model):
     def __str__(self):
         return self.company_name
 
-# TO BE DISCUSSED
-class Order(models.Model):
-    #company_id=models.IntegerField(default=0)
-    #manufacturer_id=models.IntegerField(default=0)
-    company=models.ForeignKey(Company,on_delete=models.CASCADE)
-    manufacturer=models.ForeignKey(Manufacturer,on_delete=models.CASCADE)# one manufacturer has to be selected or else we can set default 
-    order_date=models.DateTimeField(auto_now_add=True)
-    quantity=models.CharField(max_length=100)
-    def __str__(self):
-        return self.company
-    #class Meta:
-        #ordering=['order_date']
     
+#MATERIAL/PRODUCT
+class Product(models.Model):
+    #manufacturer        = models.ForeignKey(Manufacturer,on_delete=models.CASCADE)
+    email_manufacturer   =models.EmailField(blank=True)
+    name                = models.CharField(max_length=100)
+    image               = ImageField(null=True, blank=True)
+    description         = models.CharField(max_length=400)
+    dispersion_date     = models.DateField()
+    duration            = DurationField()# it is the regular duration at which the order will be sent
+    cost_price          = models.IntegerField()
+    sell_price          = models.IntegerField()  #Give choices here
 
-class ManufacturerOrder(models.Model):
-    manufacturer=models.ForeignKey(Manufacturer,on_delete=models.CASCADE)
-    dispersion_date=models.DateField()
-    last_date_dispersion=models.DateField(default=None)# it is the regular duration at which the order will be sent
-    discount=models.IntegerField()
-    upperLimit=models.IntegerField(default=500)
-    lowerLimit=models.IntegerField(default=1000)
+    stock               = models.IntegerField()
+    upper_limit         = models.IntegerField(default=50)
+    lower_limit         = models.IntegerField(default=1000)
 
     def __str__(self):
-        return self.manufacturer.company_name
+        return self.name
+
+
+class Cart(models.Model):
+    company             = models.ForeignKey(Company,on_delete=models.SET_NULL, null=True)
+    delivery_date       = models.DateField()
+    complete            = models.BooleanField(default=False)
+    delivery_address    = models.CharField(max_length=400)
+
+    @property
+    def get_cart_total(self):
+        productorder = self.productorder_set.all()
+        total = sum([item.get_product_total for item in productorder])
+        return total 
+
+
+class ProductOrder(models.Model):
+    cart            = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
+    product         = models.ForeignKey(Product,on_delete=models.CASCADE)
+    date_added      = models.DateField(auto_now_add=True)   
+    quantity        = models.IntegerField()
+
+    @property
+    def get_product_total(self):
+        total = self.product.sell_price * self.quantity
+        return total

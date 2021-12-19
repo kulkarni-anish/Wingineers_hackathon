@@ -7,10 +7,10 @@ from django.core.cache import cache
 import http.client
 
 
-#username=config('username')
-#password=config('password')
-username='djangorest3@gmail.com'
-password='DjangoRest#123'
+username=config('username')
+password=config('password')
+#username='djangorest3@gmail.com'
+#password='DjangoRest#123'
 
 def send_mail(user,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
 

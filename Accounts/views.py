@@ -46,8 +46,7 @@ def registration_view(request):
             token = Token.objects.get(user=user).key
             data['token'] = token
             data['phone_number'] = user.phone_number
-            data['type']= user.type
-
+            data['type'] = user.type
 
             send_mail(user=user,html='',
                 text='Here is your OTP',

@@ -15,12 +15,7 @@ class ManufacturerSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
-class ManufacturerOrderSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model=ManufacturerOrder
-        fields='__all__'
-
-class OrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Order
-        fields='__all__'
+        model=Product
+        fields="__all__"
