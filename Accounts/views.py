@@ -95,7 +95,6 @@ def email_verification_view(request):
 
 class Otp_Verification(APIView):
 
-    
     def post(self, request):
         try:
             data = request.data
@@ -118,18 +117,19 @@ class Otp_Verification(APIView):
             print(e)
         return Response({'status': 404, 'message': 'something is wrong'})
 
+@api_view(['POST', ])
+def number_verification_view(request):
+    if request.method == 'POST':
+        data = request.data
+        user = MyUser.objects.get(phone_number = data['phone_number'])
+        otp = data['phone_otp']
+        print(otp)
+        if user.phone_otp==otp:
+            user.phone_is_verified = True
+            user.save()
+            if user.email_is_verified == True:
+                user.is_active = True
+                user.save()
+                return JsonResponse({'status': 200, 'message': 'OTP verified and user also verified'})
 
-##Following is for resending otp
-    # def patch(self,request):
-    #     try:
-    #         data = request.data
-
-    #         if not MyUser.objects.filter(phone_number = data['phone_number']).exists():
-    #             return Response({'status': 404, 'message': 'No user found'})
-
-    #         if send_otp(data['phone_number']):
-    #             return Response({'status': 200, 'message':'new OTP sent'})
-    #         else:
-    #             return Response({'status': 404, 'message': 'try after some time'})
-    #     except Exception as e:
-    #         print(e)
+        return JsonResponse({'Response' : 'Mobile number successfully Verified'})

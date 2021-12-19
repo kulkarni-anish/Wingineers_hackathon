@@ -5,10 +5,15 @@ from decouple import config
 import random
 from django.core.cache import cache
 import http.client
-
+from twilio.rest import Client
 
 username=config('username')
 password=config('password')
+
+account_sid=config('account_sid')
+auth_token=config('auth_token')
+
+#Function to send an otp on email for verification
 
 def send_mail(user,html=None,text='Email_body',subject='Confirmation',from_email='',to_emails=[]):
 
@@ -37,13 +42,23 @@ def send_mail(user,html=None,text='Email_body',subject='Confirmation',from_email
     server.quit()
 
 
+
+#Function to send an otp on mobile number for verifcation
+
 def send_otp(phone_number, user_obj):
 
-    # if cache.get(phone_number):        #To check if the otp is stil valid
-    #     return False
-
     otp_gen = random.randint(1000,9999)
-    # cache.set(phone_number, otp_gen, timeout=180)
+
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+                    body='Your verification OTP is '+str(otp_gen),
+                    from_='+12626003482',
+                    to=phone_number
+                    )
+
+    print(message.sid)
+
     user_obj.phone_otp  = otp_gen
     user_obj.save()
     return True

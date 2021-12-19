@@ -42,7 +42,7 @@ class Manufacturer(models.Model):
     buisness_type=models.CharField(max_length=200,choices=STATUS)
     main_products=models.CharField(max_length=100)
     total_annual_revenue=models.CharField(max_length=100)
-    certification=models.ImageField()
+    certification=models.ImageField(blank=True)
     total_employee=models.IntegerField()
     year_esatblished=models.IntegerField()
     registered_date=models.DateTimeField(auto_now_add=True)
@@ -57,16 +57,16 @@ class Manufacturer(models.Model):
     
 #MATERIAL/PRODUCT
 class Product(models.Model):
-    manufacturer        = models.ForeignKey(Manufacturer,on_delete=models.CASCADE)
+    manufacturer_email        = models.EmailField()
     name                = models.CharField(max_length=100)
     image               = ImageField(null=True, blank=True)
     description         = models.CharField(max_length=400)
-    dispersion_date     = models.DateField()
-    duration            = DurationField()# it is the regular duration at which the order will be sent
-    cost_price          = models.IntegerField()
-    sell_price          = models.IntegerField()  #Give choices here
+    dispersion_date     = models.DateField(blank=True, null=True)
+    duration            = DurationField(blank=True,null=True)# it is the regular duration at which the order will be sent
+    cost_price          = models.IntegerField(null=True)
+    sell_price          = models.IntegerField(blank=True,null=True)  #Give choices here
 
-    stock               = models.IntegerField()
+    stock               = models.IntegerField(null=True)
     upper_limit         = models.IntegerField(default=50)
     lower_limit         = models.IntegerField(default=1000)
 

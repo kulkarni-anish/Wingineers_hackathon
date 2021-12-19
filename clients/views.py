@@ -44,27 +44,37 @@ class ManufacturerView(generics.ListCreateAPIView):
             return Response(serializer.errors)
 
 
-# class ManufacturerOrderView(generics.ListCreateAPIView):
-#     queryset=ManufacturerOrder.objects.all()
-#     serializer_class=ManufacturerOrderSerializer
-#     def post(self,request):
-#         serializer=ManufacturerOrderSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data.id)
-#         else:
-#             return Response(serializer.errors)
+class ProductOrderView(generics.ListCreateAPIView):
+    queryset=ProductOrder.objects.all()
+    serializer_class=ProductOrderSerializer
+    def post(self,request):
+        serializer=ProductOrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data.id)
+        else:
+            return Response(serializer.errors)
 
-# class OrderView(generics.ListCreateAPIView):
-#     queryset=Order.objects.all()
-#     serializer_class=OrderSerializer
-#     def post(self,request):
-#         serializer=OrderSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data.id)
-#         else:
-#             return Response(serializer.errors)
+class CartView(generics.ListCreateAPIView):
+    queryset=Cart.objects.all()
+    serializer_class=CartSerializer
+    def post(self,request):
+        serializer=CartSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data.id)
+        else:
+            return Response(serializer.errors)
 
-
+class Productview(generics.ListCreateAPIView):
+    queryset=Company.objects.all()
+    serializer_class = ProductSerializer
+    def post(self,request):
+        serializer=ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            #user= MyUser.objects.get(email=serializers.manufacturer_email)
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
 
