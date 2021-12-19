@@ -17,7 +17,7 @@ const Register = () => {
     validationSchema: Yup.object({
       name: Yup.string()
         .required("Required")
-        .max(30, "Exceeded maximum charecter length of 30"),
+        .max(10, "Exceeded maximum charecter length of 10"),
       email: Yup.string()
         .email("Please enter a valid email")
         .required("Required"),
@@ -30,6 +30,9 @@ const Register = () => {
         .min(8, "Minimum legth for password is 8")
         .max(16, "Exceeded maximum charecter length of 16")
         .oneOf([Yup.ref("setPassword"), null], "password does not match"),
+      name: Yup.string()
+        .required("Required")
+        .max(10, "Exceeded maximum charecter length of 10"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -42,7 +45,7 @@ const Register = () => {
           <Typography className="loginDiv-headings">Register</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography className="loginDiv-text ">Name</Typography>
+          <Typography className="loginDiv-text ">Phone Number</Typography>
         </Grid>
         <Grid item xs={12}>
           <input
@@ -107,6 +110,23 @@ const Register = () => {
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
             <p className="error">{formik.errors.confirmPassword}</p>
+          ) : null}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography className="loginDiv-text">Type</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <input
+            className="styledInput "
+            id="type"
+            name="type"
+            type="type"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.type}
+          />
+          {formik.touched.type && formik.errors.type ? (
+            <p className="error">{formik.errors.type}</p>
           ) : null}
         </Grid>
         <Grid item xs={12}>
