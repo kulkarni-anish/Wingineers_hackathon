@@ -34,11 +34,6 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields ='__all__'
 
-class ProductOrderSerializer(serializers.ModelSerializer):
-    cart = CartSerializer()
-    class Meta:
-        model = ProductOrder
-        fields='__all__'
 
 class ManufacturerDetailSerializers(serializers.ModelSerializer):
     class Meta:
@@ -54,4 +49,12 @@ class EmailCheckerSerializer(serializers.ModelSerializer):
 class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['name','description','upper_limit','lower_limit','sell_price','stock_left']
+        fields = ['id','name','description','upper_limit','lower_limit','sell_price','stock_left','manufacturer_email']
+
+
+class ProductOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductOrder
+        fields='__all__'
+
+    

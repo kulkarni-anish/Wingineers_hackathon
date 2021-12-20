@@ -82,7 +82,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     company             = models.ForeignKey(Company,on_delete=models.SET_NULL, null=True)
-    delivery_date       = models.DateField()
+    delivery_date       = models.DateField(blank=True,null=True)
     complete            = models.BooleanField(default=False)
     delivery_address    = models.CharField(max_length=400)
 
@@ -93,26 +93,21 @@ class Cart(models.Model):
         return total 
 
 
+class CheckingEmail(models.Model):
+    email=models.EmailField()
+
+class Club(models.Model):
+    status = models.BooleanField(default=False)
+    product         = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+
 class ProductOrder(models.Model):
     cart            = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
-    product         = models.ForeignKey(Product,on_delete=models.CASCADE)
-    date_added      = models.DateField(auto_now_add=True)   
+    product         = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    date_added      = models.DateField(auto_now_add=True)
     quantity        = models.IntegerField()
-
+    email           = models.EmailField(null=True)
+    club            = models.ForeignKey(Club,on_delete=models.CASCADE,null=True)
     @property
     def get_product_total(self):
         total = self.product.sell_price * self.quantity
         return total
-
-
-@receiver(post_save, sender=ProductOrder)       #post_save is the signal
-def stock_reset(sender, instance=None, created=False, **kwargs):
-    if created:
-        prod_id = instance.product.id
-        prod = Product.objects.get(id=prod_id)
-        prod.stock = prod.initial_stock
-        prod.save()
-
-
-class CheckingEmail(models.Model):
-    email=models.EmailField()

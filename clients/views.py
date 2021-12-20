@@ -28,8 +28,13 @@ class Companyview(generics.ListCreateAPIView):
         serializer=CompanySerializer(data=request.data)
         if serializer.is_valid():
             email=serializer.validated_data['email']
-            user=MyUser.objects.get(email=email)
             serializer.save()
+            company = Company.objects.get(email=email)
+            print(company)
+            print(email)
+
+            cart = Cart.objects.create(company = company)
+            cart.save()
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
@@ -51,10 +56,31 @@ class ProductOrderView(generics.ListCreateAPIView):
     queryset=ProductOrder.objects.all()
     serializer_class=ProductOrderSerializer
     def post(self,request):
+        #Send quantity and prod_id
         serializer=ProductOrderSerializer(data=request.data)
+        
         if serializer.is_valid():
+            email=serializer.validated_data['email']
+            product=serializer.validated_data['product']  #email sent from frontend
+            company = Company.objects.get(email = email)
+            cart_obj = Cart.objects.get(company = company)
             serializer.save()
-            return Response(serializer.data.id)
+            ProductOrder.objects.update(email=email, cart_id=cart_obj.id)
+            #iDHAR ERROR AAEGA if there are multiple productorders with the same email
+
+            print(product)
+            product_id = Product.objects.get(name = product)
+            print(product_id)
+            #if not Club.objects.filter(product = product_id):
+            print('hello')
+            club_obj = Club.objects.create(product = product_id)
+            print(club_obj)
+            club_obj_id = Club.objects.get(product = product_id)
+            ProductOrder.objects.update(email=email, club_id=club_obj_id.id)
+
+
+
+            return Response(serializer.data)
         else:
             return Response(serializer.errors)
 
@@ -145,6 +171,7 @@ class EmailChecker(generics.ListCreateAPIView):
 
 
 class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductListSerializer(products, many=True)
