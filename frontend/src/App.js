@@ -14,6 +14,7 @@ import LoginWith from "./components/loginWith";
 
 
 
+
 function App() {
   const PrivateWrapper = () => {
     const tokenString = sessionStorage.getItem('token');
@@ -51,7 +52,7 @@ function App() {
 
           <Route exact path='/' element={<PrivateWrapper/>}>
             <Route exact path='/' element={< ManufacturerWrapper/>}>
-              <Route path="/manufacturer" element={<ManufacturerPage />} />
+              <Route path="/manufacturer/*" element={<Profile />} />
             </Route>
           </Route>
         </Routes>

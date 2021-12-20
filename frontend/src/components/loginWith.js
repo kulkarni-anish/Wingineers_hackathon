@@ -14,9 +14,11 @@ import useToken from "../context/useToken";
 
 const LoginWith = () => {
   
-    const saveToken = (userToken,userType) => {
+    const saveToken = (userToken,userType,userEmail,userId) => {
       sessionStorage.setItem('token', JSON.stringify(userToken));
       sessionStorage.setItem('type', JSON.stringify(userType));
+      sessionStorage.setItem('email', JSON.stringify(userEmail));
+      sessionStorage.setItem('user_id', JSON.stringify(userId))
     };
   
   const formik = useFormik({
@@ -38,7 +40,7 @@ const LoginWith = () => {
         method: "POST",
         body: formData,
       })
-        .then(res => res.json().then(json => saveToken(json.token,json.type)))
+        .then(res => res.json().then(json =>saveToken(json.token,json.type,json.email,json.user_id)))
         .catch((err) => console.log("fucked", err));
     },
   });

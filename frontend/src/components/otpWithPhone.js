@@ -13,12 +13,23 @@ const OtpWithphone = () => {
     },
     validationSchema: Yup.object({
       phone: Yup.string()
-        .matches(/^[0-9]{10}$/, "Must be exactly 10 digits")
+        .matches(/^[0-9]{10}$/, "Must be exactly 14 digits")
         .required("Required"),
       otp: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
       console.log(values);
+      const initialNum=91
+      const newPhone="+"+initialNum.toString()+values.phone
+      console.log(newPhone)
+      const formData =new FormData()
+      formData.append('phone_number',newPhone)
+      formData.append('phone_otp',values.otp)
+      fetch("http://127.0.0.1:8000/accounts/verify-otp/",{
+            method:'POST',
+            body:formData,
+        }).then(res=>res.json().then(json=>console.log(json)))
+        .catch(err=>console.log(err))
     },
   });
   return (

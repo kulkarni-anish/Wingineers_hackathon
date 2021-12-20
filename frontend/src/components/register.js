@@ -56,9 +56,8 @@ const Register = () => {
   });
   return (
     <div>
-      hi
       {user?
-    <div><div>{user.type}</div>{user.type==="company"?
+    <div>{user.type==="company"?
     <Company email={user.email} />
     :<Manufacturer email={user.email} />}</div>
     :<div className="loginDiv">
