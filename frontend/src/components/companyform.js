@@ -5,10 +5,12 @@ import Button from "@mui/material/Button";
 import "../styles/login.scss";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
 import "../styles/company.scss";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Navigate, Route } from "react-router-dom";
 
 const Company = ({ email }) => {
+  const [data,setData]=useState()
   const items = [
     "CompanyName",
     "CompanyType",
@@ -19,6 +21,7 @@ const Company = ({ email }) => {
     "Country",
   ];
   const formik = useFormik({
+    
     initialValues: {
       CompanyName: "",
       CompanyType: "",
@@ -47,7 +50,7 @@ const Company = ({ email }) => {
         body: formData,
       })
         .then((res) => res.json().then((json) => console.log(json)))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.json()));
     },
   });
   return (
@@ -89,6 +92,8 @@ const Company = ({ email }) => {
           >
             Register
           </Button>
+          {data?<Navigate to='/login'/>:<p></p>}
+
         </Grid>
       </Grid>
     </div>

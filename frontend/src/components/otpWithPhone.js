@@ -4,8 +4,18 @@ import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import "../styles/login.scss";
 const OtpWithphone = () => {
+  const [status,setStatus]=useState()
+  const [err,setErr]=useState()
+  const typestring = sessionStorage.getItem('type');
+  const userType = JSON.parse(typestring);
+  const errsetter=(err)=>{
+    setErr(err)
+  }
+
   const formik = useFormik({
     initialValues: {
       phone: "",
@@ -28,7 +38,7 @@ const OtpWithphone = () => {
       fetch("http://127.0.0.1:8000/accounts/verify-otp/",{
             method:'POST',
             body:formData,
-        }).then(res=>res.json().then(json=>console.log(json)))
+        }).then(res=>res.json().then(json=>setStatus(json)))
         .catch(err=>console.log(err))
     },
   });
@@ -82,6 +92,7 @@ const OtpWithphone = () => {
             Submit
             {/* <Link to="">Login</Link> */}
           </Button>
+          {status?userType==="company"?<Navigate to='/home'/>:<Navigate to="/manufacturer/about"/>:<h6></h6>}
         </Grid>
       </Grid>
     </div>

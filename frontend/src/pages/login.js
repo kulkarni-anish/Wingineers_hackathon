@@ -7,7 +7,7 @@ import Otp from "../components/otp";
 import OtpWithEmail from "../components/otpWithEmail";
 import OtpWithPhone from "../components/otpWithPhone";
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
-import Register from "../components/register";
+import Register from "./register";
 import "../styles/login.scss";
 const Login = () => {
   return (
@@ -16,7 +16,6 @@ const Login = () => {
       <Grid container>
         <Grid item sm={12} md={6} lg={6}>
           <Routes>
-            <Route path="/Register" element={<Register />}></Route>
             <Route path="/" element={<LoginWith />}></Route>
             <Route path="/otp/withEmail" element={<OtpWithEmail />}></Route>
             <Route path="/otp/withPhone" element={<OtpWithPhone />}></Route>

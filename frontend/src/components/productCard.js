@@ -5,26 +5,32 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route,Routes } from "react-router-dom";
 import "../styles/productCard.scss";
 import { useState } from "react";
-export default function ImgMediaCard() {
+import { useEffect } from "react";
+import { useContext } from "react";
+import Product from "../pages/Product";
+import { ProdContext } from "../context/useprod";
+export default function ImgMediaCard({cards,setCards}) {
   const [prod,setProd]=useState()
-  React.useEffect(()=>{
+  useEffect(()=>{
   fetch('http://127.0.0.1:8000/clients/productdetails/')
     .then(res=>res.json())
     .then(json=>setProd(json))
   },[])
-    
+  
   return (
     <div>
       <>
       {
       prod?
     prod.map(item=>
-      <div className="productcard">
-      <Card sx={{ maxWidth: 275 }} className="card">
-        <Link to="product">
+      <div className="productcard" >
+  
+        {console.log(cards)}
+      <Card sx={{ maxWidth: 275 }} id={item.id} onClick={()=>{setCards(item)}}  className="card">
+        <Link to={item.name}>
           <div className="card-div">
             <CardMedia
               className="card-img"
@@ -48,7 +54,7 @@ export default function ImgMediaCard() {
                 {item.description}
               </Typography>
             </div>
-            <Typography className="card-div2-price">${item.sell_price}</Typography>
+            <Typography className="card-div2-price">Rs{item.sell_price}</Typography>
             <Typography>{item.lower_limit} pcs. min. order</Typography>
             <Typography>{item.upper_limit} pcs. max. order</Typography>
           </CardContent>
