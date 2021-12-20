@@ -9,7 +9,7 @@ import datetime
 
 # Create your models here.
 class Company(models.Model):
-    email=models.EmailField(max_length=255,default="patwat@gmail.com")
+    email=models.EmailField(max_length=255,unique=True)
     TYPES= (
     ("Retailer","Retailer"),
     ("Wholesaler","Wholesaler"),
@@ -36,7 +36,7 @@ Year established
 """
 
 class Manufacturer(models.Model):
-    email=models.EmailField(max_length=255,default="patwat@gmail.com")
+    email=models.EmailField(max_length=255,unique=True)
     company_name=models.CharField(max_length=200)
     main_products=models.CharField(max_length=100)
     total_annual_revenue=models.CharField(max_length=100)
@@ -63,7 +63,7 @@ class Manufacturer(models.Model):
     
 #MATERIAL/PRODUCT
 class Product(models.Model):
-    manufacturer_email        = models.EmailField()
+    manufacturer_email   = models.EmailField()
     name                = models.CharField(max_length=100)
     image               = ImageField(blank=True, null=True)
     description         = models.CharField(max_length=400)

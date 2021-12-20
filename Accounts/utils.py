@@ -7,12 +7,16 @@ from django.core.cache import cache
 import http.client
 from twilio.rest import Client
 
-username=config('username')
-password=config('password')
+#username=config('username')
+#password=config('password')
+username='djangorest3@gmail.com'
+password='DjangoRest#123'
+account_sid ="ACf0bcaf00e6cad52c555382c7acbf3246"
+auth_token ="4ba5cc6cd2b3d48ee6e64406a7271c22"
 
 
-account_sid=config('account_sid')
-auth_token=config('auth_token')
+#account_sid=config('account_sid')
+#auth_token=config('auth_token')
 
 #Function to send an otp on email for verification
 
