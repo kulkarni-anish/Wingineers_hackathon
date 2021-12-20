@@ -14,9 +14,11 @@ export default function HomeNav() {
       </div>
       <div className="HomeNav-icon-div">
         <ChatIcon className="HomeNav-div-icons" />
-        <Link to="/myCart">
-          <ShoppingCartIcon className="HomeNav-div-icons" />
-        </Link>
+        <div className="HomeNav-div-icons">
+          <Link to="/myCart">
+            <ShoppingCartIcon className="HomeNav-div-icons" />
+          </Link>
+        </div>
         <AccountCircleIcon className="HomeNav-div-icons" />
       </div>
     </div>
