@@ -5,7 +5,17 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Typography from "@mui/material/Typography";
 import "../styles/login.scss";
+import { Navigate } from "react-router-dom";
+import { useState } from "react"
+
 const OtpWithEmail = () => {
+  const [status,setStatus]=useState()
+  const [err,setErr]=useState()
+  const typestring = sessionStorage.getItem('type');
+  const userType = JSON.parse(typestring);
+  const errsetter=(err)=>{
+    setErr(err)
+  }
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,8 +34,8 @@ const OtpWithEmail = () => {
       fetch("http://127.0.0.1:8000/accounts/verify-email/",{
             method:'POST',
             body:formData,
-        }).then(res=>res.json().then(json=>console.log(json)))
-        .catch(err=>console.log(err))
+        }).then(res=>res.json().then(json=>setStatus(json)))
+        .catch(err=>errsetter(err))
     },
   });
   return (
@@ -68,6 +78,7 @@ const OtpWithEmail = () => {
             <p className="error">{formik.errors.otp}</p>
           ) : null}
         </Grid>
+        {err?<p className="error">You have entered wrong crednetials</p>:<p></p>}
         <Grid item xs={12}>
           <Button
             type="submit"
@@ -78,6 +89,8 @@ const OtpWithEmail = () => {
             Submit
             {/* <Link to="">Login</Link> */}
           </Button>
+          {status?userType==="company"?<Navigate to='/home'/>:<Navigate to="/manufacturer/about"/>:<h6></h6>}
+        
         </Grid>
       </Grid>
     </div>

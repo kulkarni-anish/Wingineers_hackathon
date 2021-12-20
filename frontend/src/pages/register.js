@@ -5,14 +5,18 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import * as Yup from "yup";
-import Company from "./companyform";
-import Manufacturer from "./manufactureform";
+import Company from "../components/companyform";
+import Manufacturer from "../components/manufactureform";
+import { Navigate } from "react-router-dom";
+
 import "../styles/loginWith.scss";
 // import "../styles/register.scss";
 const Register = () => {
-  const [type,setType]=useState()
   const [user,setUser]=useState()
-  const [email,setEmail]=useState()
+  const [err,setErr]=useState()
+  const errtime=(error)=>{
+    setErr(error)
+  }
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -51,7 +55,7 @@ const Register = () => {
             method:'POST',
             body:formData,
         }).then(res=>res.json().then(json=>setUser(json)))
-        .catch(err=>console.log(err))
+        .catch(error=>errtime(error))
     },
   });
   return (
@@ -162,6 +166,7 @@ const Register = () => {
         </Grid>
       </Grid>
     </div>}
+    
     </div>
   );
 };

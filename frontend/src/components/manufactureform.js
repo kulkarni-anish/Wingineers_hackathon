@@ -5,7 +5,9 @@ import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "../styles/company.scss";
+import { Navigate } from "react-router-dom";
 const Manufacturer = ({ email }) => {
+  const [data,setData]=useState()
   const items = [
     "ManufacturerName",
     "TotalAnnualRevenue",
@@ -51,7 +53,7 @@ const Manufacturer = ({ email }) => {
         method: "POST",
         body: formData,
       })
-        .then((res) => res.json().then((json) => console.log(json)))
+        .then((res) => res.json().then((json) =>setData(json)))
         .catch((err) => console.log(err));
     },
   });
@@ -95,6 +97,7 @@ const Manufacturer = ({ email }) => {
             Register
           </Button>
         </Grid>
+        {data?<Navigate to='/login' />:<p></p>}
       </Grid>
     </div>
   );

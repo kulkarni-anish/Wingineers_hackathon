@@ -5,7 +5,7 @@ import Company from "./components/companyform";
 import Profile from "./pages/manufacturerProfile";
 import Manufacturer from "./components/manufactureform";
 import Product from "./pages/Product";
-
+import Register from "./pages/register";
 import CompanyPage from "./pages/companyPage";
 import ManufacturerPage from "./pages/manufacturerPage";
 import {
@@ -23,6 +23,10 @@ import { useEffect } from "react";
 import LoginWith from "./components/loginWith";
 
 function App() {
+  const [cards,setCards]=useState(1)
+  useEffect(()=>{
+    console.log(cards)
+     },[cards] )
   const PrivateWrapper = () => {
     const tokenString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenString);
@@ -32,7 +36,7 @@ function App() {
   const TypeWrapper = () => {
     const typestring = sessionStorage.getItem("type");
     const userType = JSON.parse(typestring);
-    console.log(userType === "company");
+    //console.log(userType === "company");
     return userType === "company" ? (
       <Outlet />
     ) : (
@@ -50,20 +54,21 @@ function App() {
       <Navigate to="/company" />
     );
   };
-
+  const [product,setProduct]=useState()
   return (
     <div>
       <Router>
         <Routes>
-          <Route path="/home/product" element={<Product />} />
           <Route path="/login/*" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-          {/* <Route exact path="/" element={<PrivateWrapper />}>
+           <Route exact path="/" element={<PrivateWrapper />}>
             <Route exact path="/" element={<TypeWrapper />}>
-              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/home" element={<Home cards={cards} setCards={setCards}  />} />
+              <Route exact path="/home/:id" element={<Product cards={cards} setCards={setCards} />} /> 
             </Route>
-          </Route> */}
-          <Route exact path="/home" element={<Home />} />
+          </Route> 
+
           <Route exact path="/" element={<PrivateWrapper />}>
             <Route exact path="/" element={<ManufacturerWrapper />}>
               <Route path="/manufacturer/*" element={<Profile />} />

@@ -13,12 +13,13 @@ import { TokenContext } from "../context/useToken";
 import useToken from "../context/useToken";
 
 const LoginWith = () => {
-  
+    const [auth,setAuth]=useState()
     const saveToken = (userToken,userType,userEmail,userId) => {
       sessionStorage.setItem('token', JSON.stringify(userToken));
       sessionStorage.setItem('type', JSON.stringify(userType));
       sessionStorage.setItem('email', JSON.stringify(userEmail));
       sessionStorage.setItem('user_id', JSON.stringify(userId))
+      setAuth(userToken)
     };
   
   const formik = useFormik({
@@ -91,7 +92,10 @@ const LoginWith = () => {
             className="styledButton"
             onClick={formik.handleSubmit}
           >
-            <Link to="otp/">Login</Link>
+            Login
+            {auth
+            ?<Navigate to='otp/'></Navigate>
+            :<p></p> }
           </Button>
         </Grid>
 
@@ -99,7 +103,7 @@ const LoginWith = () => {
           <div className="styledRegister">
             <p>Or</p>
             <Typography variant="contained">
-              <Link to="Register">Register</Link>
+              <a href="/register">Register</a>
             </Typography>
           </div>
         </Grid>
