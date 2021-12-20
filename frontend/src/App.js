@@ -1,5 +1,6 @@
 import "./App.css";
 import Login from "./pages/login";
+import Home from "./pages/home";
 import Company from "./components/companyform";
 import Profile from "./pages/manufacturerProfile";
 import Manufacturer from "./components/manufactureform";
@@ -9,6 +10,7 @@ function App() {
     <div>
       <Router>
         <Routes>
+          <Route path="/home" element={<Home />} />
           <Route path="/login/*" element={<Login />} />
           <Route path="/Profile/*" element={<Profile />} />
         </Routes>
