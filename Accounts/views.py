@@ -72,8 +72,11 @@ def email_verification_view(request):
                 user.is_active = True
                 user.save()
                 return JsonResponse({'status': 200, 'message': 'Email verified and user also verified'})
+            return JsonResponse({'status': 200, 'message': 'Email successfully verified'})
+        else:
+            return JsonResponse({'status': 403, 'message': 'OTP is incorrect'})
 
-        return JsonResponse({'Response' : 'Email successfully Verified'})
+        
 
 
 # class RegisterView(APIView):
@@ -93,29 +96,29 @@ def email_verification_view(request):
 #             return Response({'status': 404, 'message': 'something is wrong'})
 
 
-class Otp_Verification(APIView):
+# class Otp_Verification(APIView):
 
-    def post(self, request):
-        try:
-            data = request.data
-            user = MyUser.objects.get(phone_number = data['phone_number'])
-            otp = data['phone_otp']
-            print(otp)
-            if user.phone_otp==otp:
-                user.phone_is_verified = True
-                user.save()
-                if user.email_is_verified == True:
-                    user.is_active = True
-                    user.save()
-                    return Response({'status': 200, 'message': 'OTP verified and user also verified'})
+#     def post(self, request):
+#         try:
+#             data = request.data
+#             user = MyUser.objects.get(phone_number = data['phone_number'])
+#             otp = data['phone_otp']
+#             print(otp)
+#             if user.phone_otp==otp:
+#                 user.phone_is_verified = True
+#                 user.save()
+#                 if user.email_is_verified == True:
+#                     user.is_active = True
+#                     user.save()
+#                     return Response({'status': 200, 'message': 'OTP verified and user also verified'})
                 
-                return Response({'status': 200, 'message': 'OTP verified'})
-            else:
-                return Response({'status': 403, 'message': 'OTP is incorrect'})
+#                 return Response({'status': 200, 'message': 'OTP verified'})
+#             else:
+#                 return Response({'status': 403, 'message': 'OTP is incorrect'})
 
-        except Exception as e:
-            print(e)
-        return Response({'status': 404, 'message': 'something is wrong'})
+#         except Exception as e:
+#             print(e)
+#         return Response({'status': 404, 'message': 'something is wrong'})
 
 @api_view(['POST', ])
 def number_verification_view(request):
@@ -130,6 +133,9 @@ def number_verification_view(request):
             if user.email_is_verified == True:
                 user.is_active = True
                 user.save()
-                return JsonResponse({'status': 200, 'message': 'OTP verified and user also verified'})
+                return JsonResponse({'status': 200, 'message': 'Mobile number verified and user also verified'})
+            return JsonResponse({'status': 200, 'message': 'Mobile number successfully verified'})
+        else:
+            return JsonResponse({'status': 403, 'message': 'OTP is incorrect'})
 
-        return JsonResponse({'Response' : 'Mobile number successfully Verified'})
+
