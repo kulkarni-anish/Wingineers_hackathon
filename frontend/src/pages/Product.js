@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/product.scss";
 const Product = ({cards,setCards}) => {
   console.log(cards)
-  return <div>hwlo</div>;
+  return <div>{cards.name}</div>;
 };
 
 export default Product;
