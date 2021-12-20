@@ -58,3 +58,4 @@ class ProductOrderSerializer(serializers.ModelSerializer):
         fields='__all__'
 
     
+        fields = ['id','name','description','upper_limit','lower_limit','sell_price','stock_left','manufacturer_email']

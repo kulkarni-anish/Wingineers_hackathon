@@ -171,8 +171,10 @@ class EmailChecker(generics.ListCreateAPIView):
 
 
 class ProductListView(generics.ListAPIView):
-    queryset = Product.objects.all()
+    queryset=Product.objects.all()
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductListSerializer(products, many=True)
         return Response(serializer.data)
+
+
