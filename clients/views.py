@@ -142,3 +142,10 @@ class EmailChecker(generics.ListCreateAPIView):
             return Response(datas)
         else:
             return Response(serializer.errors)
+
+
+class ProductListView(generics.ListAPIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductListSerializer(products, many=True)
+        return Response(serializer.data)
