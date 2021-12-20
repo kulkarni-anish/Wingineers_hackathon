@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -25,18 +25,51 @@ function createData(name, calories, value) {
 }
 
 export default function BasicTable() {
-  const [number, setNumber] = useState(9324251849);
-  const [email, setEmail] = useState("patwtanish10@gmail.com");
-  const [address, setAddress] = useState("Andheri(W)");
-  const [years, setYears] = useState(25);
-  const rows = [
-    createData("Contact", "", number),
-    createData("Email", "", email),
-    createData("Address", "", address),
-    createData("Experience", "", years),
-  ];
-  const classes = useStyles();
+  const [manufacturerData,setManufacturerData]=useState()
+  const [data,setData]=useState()
+  
+  
+  useEffect(()=>{
+    const tokenString = sessionStorage.getItem('user_id');
+    const userId = JSON.parse(tokenString);
+    fetch('http://127.0.0.1:8000/accounts/userinfo/'+userId)
+    .then(res=>res.json())
+    .then(data=>setData(data))
+  },[])
+  useEffect(()=>{
+    const tokenEmail =sessionStorage.getItem('email');
+    const userEmail =JSON.parse(tokenEmail);
+    const formData =new FormData()
+    formData.append('email',userEmail)
+    fetch('http://127.0.0.1:8000/clients/emailchecker/', {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json().then((json) =>setManufacturerData(json)))
+      .catch((err) => console.log(err));
+  },[])
+  let rows=[createData("Contact", "", "loadig"),
+  createData("Email", "", "loading"),
+  createData("Address", "", "loading"),
+  createData("Experience", "", "loading"),]
+  if(data){rows = [
+    createData("Contact", "", data.phone_number),
+    createData("Email", "", data.email),
+    createData("Address", "","loading"),
+    createData("Experience", "","loading"),
+  ]
+  if(manufacturerData){
+    rows = [
+      createData("Contact", "", data.phone_number),
+      createData("Email", "", data.email),
+      createData("Address", "",manufacturerData.address),
+      createData("Experience", "",manufacturerData.experience),
+    ]
 
+  }
+}
+  
+    const classes = useStyles();
   return (
     <TableContainer component={Paper} className="table">
       <Table className={classes.table} aria-label="simple table">

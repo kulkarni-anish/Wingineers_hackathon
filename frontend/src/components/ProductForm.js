@@ -24,6 +24,22 @@ const ProductForm = () => {
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       resetForm({ values: "" });
+      const typeEmail=sessionStorage.getItem('email')
+      const userEmail = JSON.parse(typeEmail);
+      console.log(userEmail)
+      const formData=new FormData()
+      formData.append('manufacturer_email',userEmail)
+      formData.append('name',values.name)
+      formData.append('description',values.desc)
+      formData.append('dispersion_date',values.date)
+      formData.append('cost_price',values.price)
+      formData.append('stock',values.num)
+      fetch("http://127.0.0.1:8000/clients/product/", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json().then((json) => console.log(json)))
+        .catch((err) => console.log(err));
     },
   });
   return (
@@ -39,9 +55,9 @@ const ProductForm = () => {
         </Grid>
         <Grid item xs={12} sm={7}>
           <input
-            type="text"
             id="name"
             name="name"
+            type="num"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.name}
@@ -63,7 +79,6 @@ const ProductForm = () => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.desc}
-            className="productDiv-form"
           ></input>
           {formik.touched.desc && formik.errors.desc ? (
             <p className="error">{formik.errors.desc}</p>
@@ -91,7 +106,6 @@ const ProductForm = () => {
         </Grid>
         <Grid item xs={12} sm={7}>
           <input
-            type="text"
             className="productDiv-form"
             id="num"
             name="num"
@@ -109,7 +123,6 @@ const ProductForm = () => {
         </Grid>
         <Grid item xs={12} sm={7}>
           <input
-            type="text"
             className="productDiv-form"
             id="price"
             name="price"
