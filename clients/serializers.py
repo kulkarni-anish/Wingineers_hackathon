@@ -39,3 +39,13 @@ class ProductOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductOrder
         fields='__all__'
+
+class ManufacturerDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model=Manufacturer
+        fields="__all__"
+
+class EmailCheckerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CheckingEmail
+        fields="__all__"

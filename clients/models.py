@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from Accounts.models import MyUser
 from django.conf import settings
+import datetime
 
 # Create your models here.
 class Company(models.Model):
@@ -35,13 +36,8 @@ Year established
 """
 
 class Manufacturer(models.Model):
-    STATUS=(
-    ("Retailer","Retailer"),
-    ("Wholesaler","Wholesaler"),
-    )
     email=models.EmailField(max_length=255,default="patwat@gmail.com")
     company_name=models.CharField(max_length=200)
-    buisness_type=models.CharField(max_length=200,choices=STATUS)
     main_products=models.CharField(max_length=100)
     total_annual_revenue=models.CharField(max_length=100)
     certification=models.ImageField(blank=True)
@@ -53,6 +49,14 @@ class Manufacturer(models.Model):
     counrty=models.CharField(max_length=100)
     state=models.CharField(max_length=100)
     city=models.CharField(max_length=100)
+    def calculate_exp(self):
+        currentDateTime = datetime.datetime.now()
+        date = currentDateTime.date()
+        year = date.strftime("%Y")
+        experience=int(year)-self.year_esatblished
+        return experience  
+
+
     def __str__(self):
         return self.company_name
 
@@ -108,3 +112,7 @@ def stock_reset(sender, instance=None, created=False, **kwargs):
         prod = Product.objects.get(id=prod_id)
         prod.stock = prod.initial_stock
         prod.save()
+
+
+class CheckingEmail(models.Model):
+    email=models.EmailField()

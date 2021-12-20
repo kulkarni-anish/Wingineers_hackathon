@@ -18,6 +18,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 
 #sending mails
 from Accounts.utils import send_mail
@@ -58,6 +59,28 @@ def registration_view(request):
         else:
             data = serializer.errors
         return Response(data)
+
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        send_mail(user=user,html='',
+                text='Here is your OTP',
+                subject='User Verification',
+                from_email='djangorest3@gmail.com',
+                to_emails=[user.email])
+        send_otp(user.phone_number, user)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email,
+            'type':user.type
+        })
+
 
 @api_view(['POST', ])
 def email_verification_view(request):
@@ -139,3 +162,11 @@ def number_verification_view(request):
             return JsonResponse({'status': 403, 'message': 'OTP is incorrect'})
 
 
+class UserDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset=MyUser.objects.all()
+    serializer_class=MyUserSerializer
+
+class ManufacturerDetails(generics.ListCreateAPIView):
+    def post(self,request):
+        print(request.data)
+        
