@@ -14,8 +14,38 @@ class ManufacturerSerializer(serializers.ModelSerializer):
         model=Manufacturer
         fields='__all__'
 
+class ManuSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Manufacturer
+        fields=['company_name']
 
 class ProductSerializer(serializers.ModelSerializer):
+    manufacturer_email = serializers.EmailField()
+    #manufacturer = ManuSerializer(source='manufacturer.company_name', many=True)
+    #manufacturer = serializers.PrimaryKeyRelatedField(source='manufacturer.company_name', queryset=Manufacturer.objects.all())
+
     class Meta:
-        model=Product
+        model = Product
+        exclude = ['duration','sell_price','upper_limit','lower_limit','stock_left']
+
+class CartSerializer(serializers.ModelSerializer):
+    company = CompanySerializer()
+    class Meta:
+        model = Cart
+        fields ='__all__'
+
+class ProductOrderSerializer(serializers.ModelSerializer):
+    cart = CartSerializer()
+    class Meta:
+        model = ProductOrder
+        fields='__all__'
+
+class ManufacturerDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model=Manufacturer
+        fields="__all__"
+
+class EmailCheckerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CheckingEmail
         fields="__all__"

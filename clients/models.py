@@ -1,8 +1,11 @@
 from django.db import models
 from django.db.models.fields import DurationField
 from django.db.models.fields.files import ImageField
+from django.db.models.signals import post_save
+from django.dispatch.dispatcher import receiver
 from Accounts.models import MyUser
 from django.conf import settings
+import datetime
 
 # Create your models here.
 class Company(models.Model):
@@ -37,31 +40,39 @@ class Manufacturer(models.Model):
     company_name=models.CharField(max_length=200)
     main_products=models.CharField(max_length=100)
     total_annual_revenue=models.CharField(max_length=100)
-    total_employee=models.CharField(max_length=255)
-    year_esatblished=models.CharField(max_length=255)
+    certification=models.ImageField(blank=True)
+    total_employee=models.IntegerField()
+    year_esatblished=models.IntegerField()
     registered_date=models.DateTimeField(auto_now_add=True)
     address_main=models.CharField(max_length=255)
     zip_code=models.IntegerField()
     counrty=models.CharField(max_length=100)
     state=models.CharField(max_length=100)
     city=models.CharField(max_length=100)
+    def calculate_exp(self):
+        currentDateTime = datetime.datetime.now()
+        date = currentDateTime.date()
+        year = date.strftime("%Y")
+        experience=int(year)-self.year_esatblished
+        return experience  
+
+
     def __str__(self):
         return self.company_name
 
     
 #MATERIAL/PRODUCT
 class Product(models.Model):
-    #manufacturer        = models.ForeignKey(Manufacturer,on_delete=models.CASCADE)
-    email_manufacturer   =models.EmailField(blank=True)
+    manufacturer_email        = models.EmailField()
     name                = models.CharField(max_length=100)
     image               = ImageField(null=True, blank=True)
     description         = models.CharField(max_length=400)
-    dispersion_date     = models.DateField()
-    duration            = DurationField()# it is the regular duration at which the order will be sent
-    cost_price          = models.IntegerField()
-    sell_price          = models.IntegerField()  #Give choices here
-
-    stock               = models.IntegerField()
+    dispersion_date     = models.DateField(blank=True, null=True)
+    duration            = DurationField(blank=True,null=True)# it is the regular duration at which the order will be sent
+    cost_price          = models.IntegerField(null=True)
+    sell_price          = models.IntegerField(blank=True,null=True)  #Give choices here
+    stock               = models.IntegerField(null=True)
+    stock_left          = models.IntegerField(null=True,default=1000)
     upper_limit         = models.IntegerField(default=50)
     lower_limit         = models.IntegerField(default=1000)
 
@@ -92,3 +103,16 @@ class ProductOrder(models.Model):
     def get_product_total(self):
         total = self.product.sell_price * self.quantity
         return total
+
+
+@receiver(post_save, sender=ProductOrder)       #post_save is the signal
+def stock_reset(sender, instance=None, created=False, **kwargs):
+    if created:
+        prod_id = instance.product.id
+        prod = Product.objects.get(id=prod_id)
+        prod.stock = prod.initial_stock
+        prod.save()
+
+
+class CheckingEmail(models.Model):
+    email=models.EmailField()

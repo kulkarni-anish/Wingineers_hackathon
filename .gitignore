@@ -3,7 +3,5 @@ db.sqlite3
 Pipfile
 Pipfile.lock
 virtual
-<<<<<<< HEAD
-=======
 __pycache__
->>>>>>> 512b82ee09cd1b596a60fca6169cc9c91a9fc28a
+migrations
