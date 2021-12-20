@@ -5,7 +5,7 @@ import Company from "./components/companyform";
 import Profile from "./pages/manufacturerProfile";
 import Manufacturer from "./components/manufactureform";
 import Product from "./pages/Product";
-
+import MyCart from "./pages/MyCart";
 import CompanyPage from "./pages/companyPage";
 import ManufacturerPage from "./pages/manufacturerPage";
 import {
@@ -57,7 +57,7 @@ function App() {
         <Routes>
           <Route path="/home/product" element={<Product />} />
           <Route path="/login/*" element={<Login />} />
-
+          <Route path="/myCart" element={<MyCart />} />
           {/* <Route exact path="/" element={<PrivateWrapper />}>
             <Route exact path="/" element={<TypeWrapper />}>
               <Route exact path="/home" element={<Home />} />
