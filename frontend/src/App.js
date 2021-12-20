@@ -1,63 +1,76 @@
 import "./App.css";
 import Login from "./pages/login";
+import Home from "./pages/home";
 import Company from "./components/companyform";
 import Profile from "./pages/manufacturerProfile";
 import Manufacturer from "./components/manufactureform";
+import Product from "./pages/Product";
+
 import CompanyPage from "./pages/companyPage";
 import ManufacturerPage from "./pages/manufacturerPage";
-import { BrowserRouter as Router, Link, Routes, Route,Outlet,Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import useToken from "./context/useToken";
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import LoginWith from "./components/loginWith";
 
-
-
-
 function App() {
   const PrivateWrapper = () => {
-    const tokenString = sessionStorage.getItem('token');
+    const tokenString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenString);
     return userToken ? <Outlet /> : <Navigate to="/login" />;
   };
 
-  const TypeWrapper=()=>{
-    const typestring=sessionStorage.getItem('type')
+  const TypeWrapper = () => {
+    const typestring = sessionStorage.getItem("type");
     const userType = JSON.parse(typestring);
-    console.log(userType==="company")
-    return userType==="company"? <Outlet />:<Navigate to='/manufacturer' />
+    console.log(userType === "company");
+    return userType === "company" ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/manufacturer" />
+    );
   };
 
-  const ManufacturerWrapper=()=>{
-    const typestring=sessionStorage.getItem('type')
+  const ManufacturerWrapper = () => {
+    const typestring = sessionStorage.getItem("type");
     const userType = JSON.parse(typestring);
-    console.log(userType==="manufacturer")
-    return userType==="manufacturer"? <Outlet />:<Navigate to='/company' />
+    console.log(userType === "manufacturer");
+    return userType === "manufacturer" ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/company" />
+    );
   };
 
-  
   return (
     <div>
       <Router>
         <Routes>
+          <Route path="/home/product" element={<Product />} />
           <Route path="/login/*" element={<Login />} />
-          <Route path="/Profile/*" element={<Profile />} />
-          
-          <Route exact path='/' element={<PrivateWrapper/>}>
-            <Route exact path='/' element={<TypeWrapper/>}>
-                <Route exact path='/company' element={<CompanyPage/>}/>
-              </Route>
+
+          <Route exact path="/" element={<PrivateWrapper />}>
+            <Route exact path="/" element={<TypeWrapper />}>
+              <Route exact path="/home" element={<Home />} />
+            </Route>
           </Route>
 
-          <Route exact path='/' element={<PrivateWrapper/>}>
-            <Route exact path='/' element={< ManufacturerWrapper/>}>
+          <Route exact path="/" element={<PrivateWrapper />}>
+            <Route exact path="/" element={<ManufacturerWrapper />}>
               <Route path="/manufacturer/*" element={<Profile />} />
             </Route>
           </Route>
         </Routes>
       </Router>
-
     </div>
   );
 }
