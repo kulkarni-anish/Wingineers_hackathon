@@ -1,9 +1,9 @@
 import React from "react";
 import Cards from "../components/productCard";
-const Home = () => {
+const Home = ({cards,setCards}) => {
   return (
     <div>
-      <Cards />
+      <Cards cards={cards} setCards={setCards}  />
     </div>
   );
 };
