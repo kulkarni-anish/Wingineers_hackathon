@@ -1,0 +1,59 @@
+// .HomeNav {
+//   background-color: #ffe3d2;
+//   display: flex;
+//   height: 40px;
+//   padding: 0.75%;
+//   align-items: center;
+//   &-div {
+// align-items: center;
+// margin-left: 30%;
+// width: 10%;
+// justify-content: space-between;
+// &-icons {
+//   justify-content: space-evenly;
+// }
+//   }
+//   &-search {
+// border-radius: 20px;
+// height: 80%;
+// border-width: 0.5px;
+// color: white !important;
+// width: 35%;
+// background-color: #cf8b64;
+// margin-left: 25%;
+//   }
+// }
+.HomeNav {
+  width: 100%;
+  background-color: #ffe3d2;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.searchDiv {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+.HomeNav-icon-div {
+  display: flex;
+  justify-content: end;
+  width: 60%;
+}
+.HomeNav-div-icons {
+  margin-right: 4% !important;
+  font-size: 35px !important;
+}
+.HomeNav-search {
+  border-radius: 20px;
+  height: 30px;
+  padding-left: 8px;
+  border-width: 0.5px;
+  color: white !important;
+  width: 60%;
+  background-color: #cf8b64;
+  &::placeholder {
+    color: white !important;
+    font-family: "Poppins" !important;
+  }
+}

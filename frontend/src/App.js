@@ -58,12 +58,12 @@ function App() {
           <Route path="/home/product" element={<Product />} />
           <Route path="/login/*" element={<Login />} />
 
-          <Route exact path="/" element={<PrivateWrapper />}>
+          {/* <Route exact path="/" element={<PrivateWrapper />}>
             <Route exact path="/" element={<TypeWrapper />}>
               <Route exact path="/home" element={<Home />} />
             </Route>
-          </Route>
-
+          </Route> */}
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/" element={<PrivateWrapper />}>
             <Route exact path="/" element={<ManufacturerWrapper />}>
               <Route path="/manufacturer/*" element={<Profile />} />
