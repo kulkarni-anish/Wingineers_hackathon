@@ -5,7 +5,7 @@ from . import views
 from .views import CartView, ProductListView, ProductOrderView, Productview
 
 urlpatterns=[
-    path('',views.Companyview.as_view()),
+    path('company/',views.Companyview.as_view()),
     path('manufacturer/',views.ManufacturerView.as_view()),
 
     path('order/',ProductOrderView.as_view()),

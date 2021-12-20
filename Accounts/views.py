@@ -48,14 +48,6 @@ def registration_view(request):
             data['phone_number'] = user.phone_number
             data['type'] = user.type
 
-            send_mail(user=user,html='',
-                text='Here is your OTP',
-                subject='User Verification',
-                from_email='djangorest3@gmail.com',
-                to_emails=[user.email])
-
-            send_otp(user.phone_number, user)
-
         else:
             data = serializer.errors
         return Response(data)

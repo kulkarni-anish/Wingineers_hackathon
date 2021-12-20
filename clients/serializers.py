@@ -54,4 +54,4 @@ class EmailCheckerSerializer(serializers.ModelSerializer):
 class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['name','description','upper_limit','lower_limit','sell_price','stock_left']
+        fields = ['id','name','description','upper_limit','lower_limit','sell_price','stock_left','manufacturer_email']
