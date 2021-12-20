@@ -70,11 +70,7 @@ function App() {
                 path="/home"
                 element={<Home cards={cards} setCards={setCards} />}
               />
-              <Route
-                exact
-                path="/home/:id"
-                element={<Product cards={cards} setCards={setCards} />}
-              />
+
               <Route path="/myCart" element={<MyCart />} />
             </Route>
           </Route>
