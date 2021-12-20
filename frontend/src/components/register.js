@@ -23,7 +23,7 @@ const Register = () => {
     validationSchema: Yup.object({
       name: Yup.string()
         .required("Required")
-        .max(10, "Exceeded maximum charecter length of 10"),
+        .max(14, "Exceeded maximum charecter length of 10"),
       email: Yup.string()
         .email("Please enter a valid email")
         .required("Required"),
@@ -38,7 +38,7 @@ const Register = () => {
         .oneOf([Yup.ref("setPassword"), null], "password does not match"),
       name: Yup.string()
         .required("Required")
-        .max(10, "Exceeded maximum charecter length of 10"),
+        .max(14, "Exceeded maximum charecter length of 10"),
     }),
     onSubmit: (values) => {
       const formData=new FormData()
@@ -57,7 +57,7 @@ const Register = () => {
   return (
     <div>
       {user?
-    <div>{user.type=="company"?
+    <div>{user.type==="company"?
     <Company email={user.email} />
     :<Manufacturer email={user.email} />}</div>
     :<div className="loginDiv">
