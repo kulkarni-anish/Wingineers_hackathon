@@ -1,3 +1,4 @@
+
 from .models import *
 from rest_framework import serializers
 
@@ -27,3 +28,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return user
 
 
+class MyUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=MyUser
+        fields="__all__"

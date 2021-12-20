@@ -1,9 +1,11 @@
 from copy import error
+from django.http.response import JsonResponse
 from django.shortcuts import render
 import datetime
 
 #REST FRAMEWORK
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import status
@@ -40,7 +42,7 @@ class ManufacturerView(generics.ListCreateAPIView):
         serializer=ManufacturerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data.id)
+            return Response(serializer.data)
         else:
             return Response(serializer.errors)
 
@@ -105,3 +107,38 @@ class Productview(generics.ListCreateAPIView):
         else:
             return Response(serializer.errors)
 
+class ProductSerializerView(generics.ListCreateAPIView):
+    def post(self,request):
+        serializer=ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            user=MyUser.objects.get(email=serializer.email_manufacturer)
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+
+class ManufacturerDetails(generics.ListCreateAPIView):
+    queryset=Manufacturer.objects.all()
+    serializer_class = ManufacturerDetailSerializers
+    def post(self,request):
+        print(request.data)
+        return JsonResponse("Hello")
+        
+class EmailChecker(generics.ListCreateAPIView):
+    queryset=CheckingEmail.objects.all() 
+    serializer_class= EmailCheckerSerializer
+    def post(self,request):
+        serializer=EmailCheckerSerializer(data=request.data) 
+        print(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print(serializer['email'])
+            manufacturer=Manufacturer.objects.get(email=serializer.data['email'])
+            serializer.data['manufacturer']=manufacturer
+            datas={}
+            datas['address']=manufacturer.address_main
+            datas['experience']=manufacturer.calculate_exp()
+            return Response(datas)
+        else:
+            return Response(serializer.errors)

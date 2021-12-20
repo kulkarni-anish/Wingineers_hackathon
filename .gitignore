@@ -4,3 +4,4 @@ Pipfile
 Pipfile.lock
 virtual
 __pycache__
+migrations
