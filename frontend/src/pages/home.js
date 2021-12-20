@@ -1,9 +1,9 @@
 import React from "react";
-import Card from "../components/productCard";
+import Cards from "../components/productCard";
 const Home = () => {
   return (
     <div>
-      <Card />
+      <Cards />
     </div>
   );
 };
