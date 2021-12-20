@@ -65,7 +65,7 @@ class Manufacturer(models.Model):
 class Product(models.Model):
     manufacturer_email        = models.EmailField()
     name                = models.CharField(max_length=100)
-    image               = ImageField(null=True, blank=True)
+    image               = ImageField(blank=True, null=True)
     description         = models.CharField(max_length=400)
     dispersion_date     = models.DateField(blank=True, null=True)
     duration            = DurationField(blank=True,null=True)# it is the regular duration at which the order will be sent

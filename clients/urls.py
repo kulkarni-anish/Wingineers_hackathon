@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from . import views
-from .views import CartView, ProductOrderView, Productview
+from .views import CartView, ProductListView, ProductOrderView, Productview
 
 urlpatterns=[
     path('',views.Companyview.as_view()),
@@ -12,5 +12,6 @@ urlpatterns=[
     path('cart/',CartView.as_view()),
     path('product/',Productview.as_view()),
     path('manufacturerdetails/',views.ManufacturerDetails.as_view()),
-    path('emailchecker/',views.EmailChecker.as_view())
+    path('emailchecker/',views.EmailChecker.as_view()),
+    path('productdetails/',ProductListView.as_view())
 ]
