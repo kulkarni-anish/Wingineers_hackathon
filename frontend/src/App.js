@@ -60,22 +60,19 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route
-            exact
-            path="/home/:id"
-            element={<Product cards={cards} setCards={setCards} />}
-          />
-          <Route
-            exact
-            path="/home"
-            element={<Home cards={cards} setCards={setCards} />}
-          />
-          <Route path="/myCart" element={<MyCart />} />
           <Route path="/login/*" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
           <Route exact path="/" element={<PrivateWrapper />}>
-            <Route exact path="/" element={<TypeWrapper />}></Route>
+            <Route exact path="/" element={<TypeWrapper />}>
+              <Route
+                exact
+                path="/home"
+                element={<Home cards={cards} setCards={setCards} />}
+              />
+
+              <Route path="/myCart" element={<MyCart />} />
+            </Route>
           </Route>
 
           <Route exact path="/" element={<PrivateWrapper />}>
