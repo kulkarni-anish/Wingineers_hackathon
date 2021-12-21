@@ -56,6 +56,7 @@ class ProductOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductOrder
         fields='__all__'
-
-    
-        fields = ['id','name','description','upper_limit','lower_limit','sell_price','stock_left','manufacturer_email']
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Order
+        fields="__all__"

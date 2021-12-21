@@ -55,6 +55,9 @@ class ManufacturerView(generics.ListCreateAPIView):
 class ProductOrderView(generics.ListCreateAPIView):
     queryset=ProductOrder.objects.all()
     serializer_class=ProductOrderSerializer
+    def get(self,request):
+        order=ProductOrder.objects.all()
+        return Response(order)
     def post(self,request):
         #Send quantity and prod_id
         serializer=ProductOrderSerializer(data=request.data)
@@ -72,12 +75,19 @@ class ProductOrderView(generics.ListCreateAPIView):
             product_id = Product.objects.get(name = product)
             print(product_id)
             #if not Club.objects.filter(product = product_id):
+            
             print('hello')
             club_obj = Club.objects.create(product = product_id)
             print(club_obj)
             club_obj_id = Club.objects.get(product = product_id)
-            ProductOrder.objects.update(email=email, club_id=club_obj_id.id)
-
+            #ProductOrder.objects.update(email=email, club_id=club_obj_id.id)
+            for clubs in Club.objects.all():
+                if(clubs.product==club_obj.product):
+                    ProductOrder.objects.update(email=email,club_id=clubs.id)
+                    club_obj.delete()
+                    print("Op")
+                else:
+                    pass
 
 
             return Response(serializer.data)
@@ -176,5 +186,59 @@ class ProductListView(generics.ListAPIView):
         products = Product.objects.all()
         serializer = ProductListSerializer(products, many=True)
         return Response(serializer.data)
+
+
+class OrderView(generics.ListCreateAPIView):
+    serializer_class=OrderSerializer
+    queryset=Order.objects.all()
+    def post(self,request):
+        serializer=OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            product_names=[]
+            total_type={}
+            many_orders=[]
+            arr=[]
+            company_names=[]
+            orders=Order.objects.all()
+            # Quantity Total based on product
+            for order in orders:
+                product_names.append(order.product_name)
+                company_names.append(order.company_name)
+            diff_type_prod_name=list(dict.fromkeys(product_names))
+            for names in diff_type_prod_name:
+                if len(Order.objects.filter(product_name=names))>1:
+                    print("op")
+                    many_orders=(Order.objects.filter(product_name=names))
+                    #print(many_orders)
+                    for some in many_orders:
+                        arr.append(some.quantity)
+                    total_type[names]=sum(arr)
+                    arr=[]
+                else:
+                    for ord in Order.objects.filter(product_name=names):
+                        total_type[names]=ord.quantity
+
+            # CART BASED ON  COMPANY_NAME
+            arrr=[]
+            total_typess={}
+            diff_type_comp_name=list(dict.fromkeys(company_names))
+            print(diff_type_comp_name)
+            for comp_name in diff_type_comp_name:
+                print(comp_name)
+                if len(Order.objects.filter(company_name=comp_name))>1:
+                    many_companies=Order.objects.filter(company_name=comp_name)
+                    print(len(many_companies))
+                    for many in many_companies:
+                        #print(many)
+                        arrr.append(many.product_name)
+                
+                    total_typess[comp_name]=arrr
+                    arrr=[]
+                else:
+                    for comp in Order.objects.filter(company_name=comp_name):
+                        total_typess[comp_name]=comp.product_name
+            print(total_typess)
+            return Response(total_type)
 
 
