@@ -118,9 +118,7 @@ class ProductOrder(models.Model):
 class Order(models.Model):
     product_name=models.CharField(max_length=255,default="Tnaish")
     order_date=models.DateTimeField(auto_now_add=True)
-    company_name=models.EmailField(default="lol@gmail.com")
+    company_name=models.CharField(max_length=255,default="balls")
     quantity=models.IntegerField(default=0)
-
-
 
 

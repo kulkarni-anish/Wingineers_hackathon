@@ -69,7 +69,6 @@ class ProductOrderView(generics.ListCreateAPIView):
             cart_obj = Cart.objects.get(company = company)
             serializer.save()
             ProductOrder.objects.update(email=email, cart_id=cart_obj.id)
-            #iDHAR ERROR AAEGA if there are multiple productorders with the same email
 
             print(product)
             product_id = Product.objects.get(name = product)
@@ -105,6 +104,7 @@ class CartView(generics.ListCreateAPIView):
         else:
             return Response(serializer.errors)
 
+#Product creation view
 class Productview(generics.ListCreateAPIView):
     queryset=Company.objects.all()
     serializer_class = ProductSerializer
@@ -245,41 +245,3 @@ class OrderView(generics.ListCreateAPIView):
 
 class OrderData(generics.ListCreateAPIView):
     queryset=Order.objects.all()
-    serializer_class=EmailCheckerSerializer
-    def post(self,request):
-        serializer=EmailCheckerSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            email=serializer.data['email']
-            orders=Order.objects.all()
-            product_names=[]
-            total_type={}
-            arr=[]
-            products=Product.objects.filter(manufacturer_email=email)
-            #print(products)
-            for product in products:
-                product_names.append(product.name)
-            #print(product_names)
-            # Quantity Total based on product
-                print(product_names)
-                for name in product_names:
-                    print(name)
-                    if len(Order.objects.filter(product_name=name))>1:
-                        print("op")
-                        many_orders=(Order.objects.filter(product_name=name))
-                        #print(many_orders)
-                        for some in many_orders:
-                            arr.append(some.quantity)
-                        total_type[name]=sum(arr)
-                        arr=[]
-                    else:
-                        for ord in Order.objects.filter(product_name=name):
-                            total_type[name]=ord.quantity
-                            return Response(total_type)
-                        print(total_type)
-                        
-                return Response(total_type)
-        return Response(serializer.errors)
-    
-
-        

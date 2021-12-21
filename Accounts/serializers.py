@@ -2,7 +2,7 @@
 from .models import *
 from rest_framework import serializers
 
-
+#User registration serializer
 class RegistrationSerializer(serializers.ModelSerializer):
 
     password2 				= serializers.CharField(style={'input_type': 'password'}, write_only=True)
