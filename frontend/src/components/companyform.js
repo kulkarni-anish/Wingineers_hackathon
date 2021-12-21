@@ -49,8 +49,8 @@ const Company = ({ email }) => {
         method: "POST",
         body: formData,
       })
-        .then((res) => res.json().then((json) => console.log(json)))
-        .catch((err) => console.log(err.json()));
+        .then((res) => res.json().then((json) => setData(json)))
+        .catch((err) => console.log(err));
     },
   });
   return (
