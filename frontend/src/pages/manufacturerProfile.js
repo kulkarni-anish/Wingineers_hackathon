@@ -24,11 +24,11 @@ function Profile() {
       </Grid>
 
       <Grid container>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} md={12} lg={5}>
           <img src={profile_img} className="manufacturerProfile-image"></img>
           <Typography className="manufacturerProfile-text">Review:</Typography>
         </Grid>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={12} lg={7}>
           <Typography className="manufacturerProfile-text1">
             ManuName
           </Typography>

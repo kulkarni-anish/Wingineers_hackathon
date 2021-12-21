@@ -5,20 +5,17 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { formik,useFormik } from "formik";
+import { formik, useFormik } from "formik";
 import * as Yup from "yup";
 
 const PlaceOrderDiv = () => {
   return (
     <div className="container1">
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography className="container1-bold">
-            Estimated delivery:
-          </Typography>
-          <Typography className="container1-text">3-4 business days</Typography>
-        </Grid>
+      <Grid item xs={12}>
+        <Typography className="container1-bold">Estimated delivery:</Typography>
+        <Typography className="container1-text">3-4 business days</Typography>
       </Grid>
+
       <Grid item xs={12}>
         <Typography className="container1-bold">
           Ensure product quality
