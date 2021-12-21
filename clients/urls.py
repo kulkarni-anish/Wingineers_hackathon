@@ -16,5 +16,6 @@ urlpatterns=[
     path('productdetails/',ProductListView.as_view()),
     path('placeorder/',ProductOrderView.as_view()),
     #path('',views.GenerealSerializer.as_view()),
-    path('orderview/',views.OrderView.as_view())
+    path('orderview/',views.OrderView.as_view()),
+    path('orderdata/',views.OrderData.as_view())
 ]
