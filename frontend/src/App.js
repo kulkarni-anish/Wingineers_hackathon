@@ -7,8 +7,7 @@ import Manufacturer from "./components/manufactureform";
 import Product from "./pages/Product";
 import MyCart from "./pages/MyCart";
 import Register from "./pages/register";
-import CompanyPage from "./pages/companyPage";
-import ManufacturerPage from "./pages/manufacturerPage";
+
 import {
   BrowserRouter as Router,
   Link,
@@ -62,7 +61,11 @@ function App() {
         <Routes>
           <Route path="/login/*" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+          <Route
+            exact
+            path="/home/:id"
+            element={<Product cards={cards} setCards={setCards} />}
+          />
           <Route exact path="/" element={<PrivateWrapper />}>
             <Route exact path="/" element={<TypeWrapper />}>
               <Route
@@ -70,11 +73,7 @@ function App() {
                 path="/home"
                 element={<Home cards={cards} setCards={setCards} />}
               />
-              <Route
-                exact
-                path="/home/:id"
-                element={<Product cards={cards} setCards={setCards} />}
-              />
+
               <Route path="/myCart" element={<MyCart />} />
             </Route>
           </Route>

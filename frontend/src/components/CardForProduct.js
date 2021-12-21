@@ -10,7 +10,7 @@ import "../styles/CardForProduct.scss";
 export default function CardForProduct() {
   return (
     <Grid container>
-      <Card sx={{ maxWidth: 800 }} className="card">
+      <Card sx={{ maxWidth: 1200 }} className="card">
         <Grid item xs={4}>
           <div className="card-div">
             <CardMedia
@@ -22,7 +22,7 @@ export default function CardForProduct() {
             />
           </div>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={8} className="space">
           <CardContent className="card-div2">
             <Typography
               className="card-div2-tittle"
