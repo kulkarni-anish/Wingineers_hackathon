@@ -17,16 +17,16 @@ const Product = ({ cards, setCards }) => {
     <div>
       <NavBar />
       <HomeNav />
-      <CardForProduct cards={cards} setCards={setCards}/>
+      <CardForProduct cards={cards} setCards={setCards} />
       <div className="bottomDiv">
         <Grid container>
           <Grid item xs={7}>
-            <ProductDetails cards={cards} setCards={setCards}/>
-            <Routes>
-              <Route path="/" element={<OrderDetails cards={cards}/>}></Route>
-            </Routes>
+            <ProductDetails cards={cards} setCards={setCards} />
             <Routes>
               <Route path="/" element={<ManufacturerDetails />}></Route>
+            </Routes>
+            <Routes>
+              <Route path="/" element={<OrderDetails cards={cards} />}></Route>
             </Routes>
           </Grid>
           <Grid item xs={5}>

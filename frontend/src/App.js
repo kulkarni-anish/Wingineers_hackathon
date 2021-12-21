@@ -60,28 +60,26 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login/*" element={<Login />} />
+          <Route path="/manufacturer/*" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route
             exact
             path="/home/:id"
             element={<Product cards={cards} setCards={setCards} />}
           />
-          <Route exact path="/" element={<PrivateWrapper />}>
-            <Route exact path="/" element={<TypeWrapper />}>
-              <Route
-                exact
-                path="/home"
-                element={<Home cards={cards} setCards={setCards} />}
-              />
+          <Route
+            exact
+            path="/home"
+            element={<Home cards={cards} setCards={setCards} />}
+          />
 
-              <Route path="/myCart" element={<MyCart />} />
-            </Route>
+          <Route path="/myCart" element={<MyCart />} />
+          <Route exact path="/" element={<PrivateWrapper />}>
+            <Route exact path="/" element={<TypeWrapper />}></Route>
           </Route>
 
           <Route exact path="/" element={<PrivateWrapper />}>
-            <Route exact path="/" element={<ManufacturerWrapper />}>
-              <Route path="/manufacturer/*" element={<Profile />} />
-            </Route>
+            <Route exact path="/" element={<ManufacturerWrapper />}></Route>
           </Route>
         </Routes>
       </Router>
