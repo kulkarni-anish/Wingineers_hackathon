@@ -6,12 +6,28 @@
   margin: 12%;
 }
 
-
 .error {
   color: red;
   display: flex;
   margin-bottom: 0 !important;
   justify-content: flex-end;
-  margin-left: 60%!important;
+  margin-left: 60% !important;
   margin-bottom: 5%;
+}
+
+@media screen and (max-width: 900px) {
+  .loginDiv {
+    width: 80%;
+    margin-left: 5%;
+  }
+  .img_div {
+    width: 80%;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 300px) {
+  .loginDiv {
+    width: 100%;
+    margin-left: 5%;
+  }
 }
