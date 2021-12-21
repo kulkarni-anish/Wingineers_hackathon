@@ -3,7 +3,11 @@ import "../styles/PlaceOrderDiv.scss";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { formik,useFormik } from "formik";
+import * as Yup from "yup";
+
 const PlaceOrderDiv = () => {
   return (
     <div className="container1">
@@ -38,7 +42,7 @@ const PlaceOrderDiv = () => {
         </Grid>
         <Grid item xs={12}>
           <Button variant="outlined" className="divButton">
-            PLACE ORDER
+            <Link to="conform">PLACE ORDER </Link>
           </Button>
         </Grid>
       </div>

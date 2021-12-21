@@ -7,7 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../styles/CardForProduct.scss";
-export default function CardForProduct() {
+export default function CardForProduct({cards,setCards}) {
+  console.log(cards)
   return (
     <Grid container>
       <Card sx={{ maxWidth: 1200 }} className="card">
@@ -30,18 +31,17 @@ export default function CardForProduct() {
               variant="h5"
               component="div"
             >
-              apple
+              {cards.name}
             </Typography>
             <div className="card-div2-desc">
               <Typography variant="body2" color="text.secondary">
-                two lines about the product description to check overflow of the
-                description and whatever
+                {cards.description}
               </Typography>
             </div>
-            <Typography className="card-div2-price">$999</Typography>
-            <Typography>50 pcs. min. order</Typography>
+            <Typography className="card-div2-price">Rs{cards.sell_price}</Typography>
+            <Typography>{cards.lower_limit} min. order</Typography>
             <Typography>Dispatch in a week</Typography>
-            <Typography>in stock</Typography>
+            <Typography>{cards.stock_left}</Typography>
           </CardContent>
         </Grid>
       </Card>

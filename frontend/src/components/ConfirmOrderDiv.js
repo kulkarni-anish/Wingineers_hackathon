@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-const PlaceOrderDiv = () => {
+const ConfirmOrderDiv = () => {
   return (
     <div className="container1">
       <Grid container>
@@ -46,4 +46,4 @@ const PlaceOrderDiv = () => {
   );
 };
 
-export default PlaceOrderDiv;
+export default ConfirmOrderDiv;

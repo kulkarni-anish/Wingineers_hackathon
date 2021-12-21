@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import React from "react";
 import "../styles/product.scss";
-const ManufacturerDetails = () => {
+const ManufacturerDetails = ({cards,useCards}) => {
   return (
     <div className="productDetails">
       <Grid container className="productDetails-container">

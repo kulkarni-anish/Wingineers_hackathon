@@ -13,29 +13,28 @@ import ConfirmOrderDiv from "../components/ConfirmOrderDiv";
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 const Product = ({ cards, setCards }) => {
-  console.log(cards);
   return (
     <div>
       <NavBar />
       <HomeNav />
-      <CardForProduct />
+      <CardForProduct cards={cards} setCards={setCards}/>
       <div className="bottomDiv">
         <Grid container>
           <Grid item xs={7}>
-            <ProductDetails />
+            <ProductDetails cards={cards} setCards={setCards}/>
             <Routes>
-              <Route path="/confirm" element={<OrderDetails />}></Route>
+              <Route path="/" element={<OrderDetails cards={cards}/>}></Route>
             </Routes>
             <Routes>
-              <Route path="/place" element={<ManufacturerDetails />}></Route>
+              <Route path="/" element={<ManufacturerDetails />}></Route>
             </Routes>
           </Grid>
           <Grid item xs={5}>
             <Routes>
-              <Route path="/place" element={<PlaceOrderDiv />}></Route>
+              <Route path="/" element={<PlaceOrderDiv />}></Route>
             </Routes>
             <Routes>
-              <Route path="/confirm" element={<ConfirmOrderDiv />}></Route>
+              <Route path="/ccc" element={<ConfirmOrderDiv />}></Route>
             </Routes>
           </Grid>
         </Grid>
