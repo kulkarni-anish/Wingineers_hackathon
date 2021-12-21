@@ -6,6 +6,10 @@ import Typography from "@mui/material/Typography";
 import CardForProduct from "../components/CardForProduct";
 import ManufacturerDetails from "../components/ManufacturerDetails";
 import OrderDetails from "../components/OrderDetails";
+import ProductDetails from "../components/ProductDetails";
+import PlaceOrderDiv from "../components/PlaceOrderDiv";
+import ConfirmOrderDiv from "../components/ConfirmOrderDiv";
+
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 const Product = ({ cards, setCards }) => {
@@ -16,49 +20,25 @@ const Product = ({ cards, setCards }) => {
       <HomeNav />
       <CardForProduct />
       <div className="bottomDiv">
-        <div className="productDetails">
-          <Grid container className="productDetails-container">
-            <Grid item xs={12}>
-              <Typography className="productDetails-headings">
-                Product Details
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography className="productDetails-black">Colors</Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography className="productDetails-brown">
-                Blue,Brown,Black
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography className="productDetails-black">Quantity</Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography className="productDetails-brown">500</Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography className="productDetails-black">Address</Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography className="productDetails-brown">
-                DJ Sanghvi,Vile parle,Mumbai-400090
-              </Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography className="productDetails-black">
-                Experience
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography className="productDetails-brown">25 years</Typography>
-            </Grid>
+        <Grid container>
+          <Grid item xs={7}>
+            <ProductDetails />
+            <Routes>
+              <Route path="/confirm" element={<OrderDetails />}></Route>
+            </Routes>
+            <Routes>
+              <Route path="/place" element={<ManufacturerDetails />}></Route>
+            </Routes>
           </Grid>
-        </div>
-        <Routes>
-          <Route path="/" element={<OrderDetails />}></Route>
-          <Route path="/ssss" element={<ManufacturerDetails />}></Route>
-        </Routes>
+          <Grid item xs={5}>
+            <Routes>
+              <Route path="/place" element={<PlaceOrderDiv />}></Route>
+            </Routes>
+            <Routes>
+              <Route path="/confirm" element={<ConfirmOrderDiv />}></Route>
+            </Routes>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
