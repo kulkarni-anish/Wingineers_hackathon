@@ -1,21 +1,31 @@
 .card {
+  margin-top: 4%;
   background-color: #ffe3d2;
   border-radius: 0 !important;
-
+  height: 300px;
   display: flex !important;
   &-div {
     margin: 7%;
+    height: 85%;
     max-width: 100%;
-    display: flex !important;
-    object-fit: cover !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
   &-img {
     border-radius: 0 !important;
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
   }
   &-div2 {
     display: flex !important;
     flex-direction: column;
+    align-content: space-around !important;
+    justify-content: space-between !important;
 
+    height: 90%;
     &-title {
       display: flex !important;
       text-align: center !important;
