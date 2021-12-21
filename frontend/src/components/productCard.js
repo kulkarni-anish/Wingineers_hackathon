@@ -23,6 +23,10 @@ export default function ImgMediaCard({ cards, setCards }) {
   return (
     <div>
       <>
+<<<<<<< HEAD
+      
+=======
+>>>>>>> 56e1e90beb2eeda7546748b5e6131d112e317ae7
         {prod ? (
           prod.map((item) => (
             <div className="productcard2">
