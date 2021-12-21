@@ -100,6 +100,7 @@ class Club(models.Model):
     status = models.BooleanField(default=False)
     product         = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
 
+
 class ProductOrder(models.Model):
     cart            = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     product         = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
@@ -111,3 +112,13 @@ class ProductOrder(models.Model):
     def get_product_total(self):
         total = self.product.sell_price * self.quantity
         return total
+
+
+
+class Order(models.Model):
+    product_name=models.CharField(max_length=255,default="Tnaish")
+    order_date=models.DateTimeField(auto_now_add=True)
+    company_name=models.CharField(max_length=255,default="balls")
+    quantity=models.IntegerField(default=0)
+
+
