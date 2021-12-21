@@ -11,7 +11,12 @@ ReactJs for the frontend and Django Rest Framework for the backend
 
 Email service: Google SMTP 
 
+![image](https://user-images.githubusercontent.com/80095817/146869442-9f598c5f-dc17-411d-9a19-8c4479c0a4f6.png)
+
 SMS service: Twilio
+
+![image](https://user-images.githubusercontent.com/80095817/146869503-3498b12f-e06a-41dd-a822-2a0681f454e1.png)
+
 
 ## Features and web pages
 
